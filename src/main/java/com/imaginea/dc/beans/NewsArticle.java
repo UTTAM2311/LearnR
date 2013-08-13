@@ -1,4 +1,4 @@
-package com.dc.beans;
+package com.imaginea.dc.beans;
 
 import java.util.Date;
 
@@ -7,14 +7,17 @@ public class NewsArticle {
 	private Boolean isPositive;
 
 	private String source;
+	
 	private String publisher;
+	private String author;
 
 	private String location;
 	private Date date;
 
 	private String url;
 
-	private String headline;
+	private String title;
+	private String description;
 	private String content;
 	
 
@@ -30,13 +33,12 @@ public class NewsArticle {
 		this.url = url;
 	}
 	
-	public NewsArticle(String source, String publisher, String url,
-			String headline) {
+	public NewsArticle(String source, String publisher, String url, String title) {
 		super();
 		this.source = source;
 		this.publisher = publisher;
 		this.url = url;
-		this.headline = headline;
+		this.title = title;
 	}
 
 	/* Getters and Setters */
@@ -65,6 +67,14 @@ public class NewsArticle {
 		this.publisher = publisher;
 	}
 
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -89,12 +99,20 @@ public class NewsArticle {
 		this.url = url;
 	}
 
-	public String getHeadline() {
-		return headline;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setHeadline(String headline) {
-		this.headline = headline;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getContent() {

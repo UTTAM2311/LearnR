@@ -5,6 +5,8 @@ import java.util.Iterator;
 
 import org.junit.Test;
 
+import com.imaginea.dc.beans.NewsArticle;
+import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
@@ -17,8 +19,9 @@ public class ReaderTest {
 		
 		String hindu = "http://www.hindu.com/rss/01hdline.xml";
 		String bbcWorld = "http://feeds.bbci.co.uk/news/world/rss.xml";
-
-		URL url = new URL(bbcWorld);
+		String googleRss = "https://news.google.com/news/feeds?pz=1&cf=all&ned=in&hl=en&output=rss";
+		
+		URL url = new URL(googleRss);
 		XmlReader reader = null;
 
 		try {
@@ -27,9 +30,30 @@ public class ReaderTest {
 			SyndFeed feed = new SyndFeedInput().build(reader);
 			System.out.println("Feed Title: " + feed.getAuthor());
 
+			SyndEntry entry;
+			SyndContent content;
+			
+			NewsArticle article;
 			for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
-				SyndEntry entry = (SyndEntry) i.next();
-				System.out.println(entry.getTitle());
+				entry = (SyndEntry) i.next();
+				content = entry.getDescription();
+				
+				article = new NewsArticle();
+				article.setTitle(entry.getTitle());
+				
+				
+				System.out.println("-------------------------------------------------------------");
+				System.out.println("Title : " + entry.getTitle());
+				
+				
+				System.out.println("Description : " + content.getValue());
+				
+				System.out.println("URI : " + entry.getUri());
+				System.out.println("Contents : " + entry.getContents());
+				System.out.println("Date : " + entry.getPublishedDate());
+				
+				
+				
 			}
 			
 		} finally {
