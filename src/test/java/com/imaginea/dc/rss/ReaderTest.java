@@ -76,7 +76,8 @@ public class ReaderTest {
 	@Test
 	public void crawlForContentTest() throws Exception {
 		
-		String pageUrlStr = "http://www.bbc.co.uk/news/world-latin-america-23166213";
+//		String pageUrlStr = "http://www.bbc.co.uk/news/world-latin-america-23166213";
+		String pageUrlStr = "http://www.nytimes.com/2007/12/31/world/africa/31kenya.html";
 		
 		URL pageUrl = new URL(pageUrlStr);
 		
@@ -91,13 +92,16 @@ public class ReaderTest {
 		String postHtml = "";
 		while ((htmlLine = pageHtml.readLine()) != null) {
 			htmlLine.trim();
+			
+			System.out.println(htmlLine);
+			
 			if (!htmlLine.isEmpty()) {
-				if (htmlLine.contains("<div class=\"story-body\">")) {
+				if (htmlLine.contains("<div id=\"articleBody\">")) {
 					slicing = true;
 					postHtml = "";
 				}
 				
-				if (htmlLine.endsWith("<!-- / story-body -->")) {
+				if (htmlLine.endsWith("<!--story end -->")) {
 					slicing = false;
 				}
 				

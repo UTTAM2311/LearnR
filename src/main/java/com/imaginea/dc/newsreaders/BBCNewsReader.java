@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -30,6 +29,8 @@ public class BBCNewsReader implements NewsReader {
 			rssFeedUrl = this.bbcRssFeedUrl;
 		}
 		
+		System.out.println("BBC RSS Feed URL : " + rssFeedUrl);
+		
 		List<NewsArticle> articles = new ArrayList<NewsArticle>();
 		XmlReader reader = null;
 		
@@ -39,6 +40,8 @@ public class BBCNewsReader implements NewsReader {
 			
 			SyndFeed feed = new SyndFeedInput().build(reader);
 			System.out.println("Feed Title: " + feed.getAuthor());
+			
+			System.out.println("total feeds count : " + feed.getEntries().size());
 
 			SyndEntry entry;
 			SyndContent content;
@@ -66,6 +69,12 @@ public class BBCNewsReader implements NewsReader {
 					article.setContent(this.crawlUrlForContent(article.getUrl()));
 				}
 				
+				articles.add(article);
+				
+				System.out.println("---------------------------------------------------------------");
+				System.out.println("Feed Title : " + entry.getTitle());
+				
+				
 			}			
 			
 		} catch (FeedException e) {
@@ -81,13 +90,14 @@ public class BBCNewsReader implements NewsReader {
 	
 	public String crawlUrlForContent(String articleUrl) throws IOException {
 		
+		System.out.println("Article URL : " + articleUrl);
+		
 		URL pageUrl = new URL(articleUrl);
 		
 		URLConnection uconn = pageUrl.openConnection();
 		HttpURLConnection conn = (HttpURLConnection) uconn;
 		BufferedReader pageHtml = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 
-		// Extract days
 		boolean slicing = false;
 
 		String htmlLine = "";
@@ -110,9 +120,7 @@ public class BBCNewsReader implements NewsReader {
 			}
 		}
 		
-		System.out.println(postHtml);
-		
-		return null;
+		return postHtml;
 	}
 
 }
