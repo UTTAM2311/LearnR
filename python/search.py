@@ -35,15 +35,36 @@ class Search(object):
         # matcher = re.compile('.*?url=(.*?)\?.*?')
 
         # Current. Works with the guid element in result entity
-        self.matcher = re.compile(
+        self.url_matcher = re.compile(
             'tag:news.google.com,\d{4}:cluster=(.*)\??.*')
+
+        self.desc_matcher = re.compile(
+            '<div class="lh">.*?<b>(.*?)<a class="p".*')
 
     def get_url(self, url):
         """Regex filter to extract actual url to article"""
         if not isinstance(url, (str, unicode)):
             raise Exception("Cannot proceed. No stringy url")
-        matches = re.findall(self.matcher, url)
+        matches = re.findall(self.url_matcher, url)
         return matches[0] if len(matches) == 1 else None
+
+    def get_desc(self, desc):
+        """Get search article description"""
+        if not isinstance(desc, (str, unicode)):
+            raise Exception("Cannot proceed. No stringy description")
+        matches = re.findall(self.desc_matcher, desc)
+        matches = matches[0] if len(matches) == 1 else None
+        esc_rep = {
+            '&nbsp': '&',
+            '&quot': "'"
+        }
+        if matches:
+            matches = re.sub("(<.*?>)", " ", matches)
+            for (key, val) in esc_rep.iteritems():
+                matches = re.sub(key, val, matches)
+            matches = matches.strip()
+
+        return matches
 
     def load_xml(self):
         """
@@ -53,7 +74,7 @@ class Search(object):
         data = getattr(self, "data")
         tree = minidom.parseString(data)
         items = tree.firstChild.firstChild.getElementsByTagName('item')
-        item_fields = ["pubDate", "guid"]
+        item_fields = ["pubDate", "guid", "description"]
         items_data = {item_x.getElementsByTagName(
             'title')[0].firstChild.wholeText: {
             x: item_x.getElementsByTagName(x)[0].firstChild.wholeText
@@ -64,6 +85,8 @@ class Search(object):
             plink = self.get_url(item["guid"])
             item["url"] = plink
             item.pop("guid")
+            pdesc = self.get_desc(item["description"])
+            item["description"] = pdesc
 
         setattr(self, "items", items_data)
 
@@ -110,6 +133,6 @@ class Search(object):
 
 
 if __name__ == '__main__':
-    SEARCH_INST = Search("murder")
+    SEARCH_INST = Search("deaths")
     SEARCH_INST.search(filter_qs="more than")
     print SEARCH_INST.items
