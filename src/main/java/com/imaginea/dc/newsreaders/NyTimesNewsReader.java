@@ -1,5 +1,6 @@
 package com.imaginea.dc.newsreaders;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.imaginea.dc.api.NewsReader;
@@ -12,7 +13,7 @@ public class NyTimesNewsReader implements NewsReader {
 		return null;
 	}
 
-	public NewsArticle crawlUrlForContent() {
+	public String crawlUrlForContent(String articleUrl) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

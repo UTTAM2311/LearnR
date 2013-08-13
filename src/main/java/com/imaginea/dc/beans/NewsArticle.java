@@ -12,7 +12,8 @@ public class NewsArticle {
 	private String author;
 
 	private String location;
-	private Date date;
+	private Date publishedDate;
+	private Date updatedDate;
 
 	private String url;
 
@@ -83,12 +84,20 @@ public class NewsArticle {
 		this.location = location;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getPublishedDate() {
+		return publishedDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setPublishedDate(Date publishedDate) {
+		this.publishedDate = publishedDate;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	public String getUrl() {

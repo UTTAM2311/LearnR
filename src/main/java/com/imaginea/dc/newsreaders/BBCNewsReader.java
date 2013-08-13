@@ -1,14 +1,20 @@
 package com.imaginea.dc.newsreaders;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.imaginea.dc.api.NewsReader;
 import com.imaginea.dc.beans.NewsArticle;
+import com.imaginea.dc.constants.NewsSource;
+import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -28,33 +34,84 @@ public class BBCNewsReader implements NewsReader {
 		XmlReader reader = null;
 		
 		try {
-			
-			URL url = new URL(rssFeedUrl);
-			
+			URL url = new URL(bbcRssFeedUrl);
 			reader = new XmlReader(url);
+			
 			SyndFeed feed = new SyndFeedInput().build(reader);
 			System.out.println("Feed Title: " + feed.getAuthor());
 
+			SyndEntry entry;
+			SyndContent content;
+			
+			NewsArticle article;
 			for (Iterator i = feed.getEntries().iterator(); i.hasNext();) {
-				SyndEntry entry = (SyndEntry) i.next();
-				System.out.println(entry.getTitle());
-			}
+				entry = (SyndEntry) i.next();
+				content = entry.getDescription();
+				
+				article = new NewsArticle();
+				
+				article.setSource(NewsSource.BBC);
+				article.setPublisher(NewsSource.BBC);
+				article.setAuthor(entry.getAuthor());
+				
+				article.setPublishedDate(entry.getPublishedDate());
+				article.setUpdatedDate(entry.getUpdatedDate());
+				
+				article.setUrl(entry.getUri());
+				article.setTitle(entry.getTitle());
+				article.setDescription(content.getValue());
+				
+				// Content
+				if(article.getUrl() != null) {
+					article.setContent(this.crawlUrlForContent(article.getUrl()));
+				}
+				
+			}			
 			
-			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
 		} catch (FeedException e) {
 			e.printStackTrace();
 		} finally {
-			if (reader != null)
+			if (reader != null) {
 				reader.close();
+			}
 		}
 		
 		return articles;
 	}
 	
-	public NewsArticle crawlUrlForContent() {
-		// TODO Auto-generated method stub
+	public String crawlUrlForContent(String articleUrl) throws IOException {
+		
+		URL pageUrl = new URL(articleUrl);
+		
+		URLConnection uconn = pageUrl.openConnection();
+		HttpURLConnection conn = (HttpURLConnection) uconn;
+		BufferedReader pageHtml = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+		// Extract days
+		boolean slicing = false;
+
+		String htmlLine = "";
+		String postHtml = "";
+		while ((htmlLine = pageHtml.readLine()) != null) {
+			htmlLine.trim();
+			if (!htmlLine.isEmpty()) {
+				if (htmlLine.contains("<div class=\"story-body\">")) {
+					slicing = true;
+					postHtml = "";
+				}
+				
+				if (htmlLine.endsWith("<!-- / story-body -->")) {
+					slicing = false;
+				}
+				
+				if (slicing) {
+					postHtml += htmlLine;
+				}
+			}
+		}
+		
+		System.out.println(postHtml);
+		
 		return null;
 	}
 

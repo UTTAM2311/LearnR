@@ -14,7 +14,7 @@ public interface NewsReader {
 	
 	/* Web Crawling for individual Article content */
 	
-	NewsArticle crawlUrlForContent();
+	String crawlUrlForContent(String articleUrl) throws IOException;
 	
 	
 	/* Archive processing */
