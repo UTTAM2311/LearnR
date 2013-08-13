@@ -81,12 +81,18 @@ class Search(object):
             for x in item_fields if len(
                 item_x.getElementsByTagName(x)) == 1} for item_x in items}
 
-        for item in items_data.itervalues():
+        # Data key customizations
+        for (key, item) in items_data.iteritems():
             plink = self.get_url(item["guid"])
             item["url"] = plink
             item.pop("guid")
             pdesc = self.get_desc(item["description"])
             item["description"] = pdesc
+            item["source"] = key.split("-")[1].strip() if len(key.split("-")) >= 2 else None
+            item["title"] = key.split("-")[0].strip() if len(key.split("-")) >= 2 else None
+            item["description"] = item["description"].replace(key, "")
+            item["pub_date"] = datetime.strptime("", item["pubDate"])
+            item.pop("pubDate")
 
         setattr(self, "items", items_data)
 
