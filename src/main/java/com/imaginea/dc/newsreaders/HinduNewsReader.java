@@ -20,13 +20,13 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
-public class BBCNewsReader implements NewsReader {
+public class HinduNewsReader implements NewsReader {
 	
-	private final String bbcRssFeedUrl = "http://feeds.bbci.co.uk/news/world/rss.xml";
+	private final String hinduRssFeedUrl = "http://www.thehindu.com/news/international/?service=rss";
 
-	public List<NewsArticle> processRSSfeed(String rssFeedUrl) throws IOException {
+	public List<NewsArticle> processRSSfeed(String rssFeedUrl)	throws IOException {
 		if(rssFeedUrl == null || rssFeedUrl.isEmpty()) {
-			rssFeedUrl = this.bbcRssFeedUrl;
+			rssFeedUrl = this.hinduRssFeedUrl;
 		}
 		
 		System.out.println("BBC RSS Feed URL : " + rssFeedUrl);
@@ -53,8 +53,8 @@ public class BBCNewsReader implements NewsReader {
 				
 				article = new NewsArticle();
 				
-				article.setSource(NewsSource.BBC);
-				article.setPublisher(NewsSource.BBC);
+				article.setSource(NewsSource.Hindu);
+				article.setPublisher(NewsSource.Hindu);
 				article.setAuthor(entry.getAuthor());
 				
 				article.setPublishedDate(entry.getPublishedDate());
@@ -87,7 +87,7 @@ public class BBCNewsReader implements NewsReader {
 		
 		return articles;
 	}
-	
+
 	public String crawlUrlForContent(String articleUrl) throws IOException {
 		
 		System.out.println("Article URL : " + articleUrl);
@@ -105,12 +105,12 @@ public class BBCNewsReader implements NewsReader {
 		while ((htmlLine = pageHtml.readLine()) != null) {
 			htmlLine.trim();
 			if (!htmlLine.isEmpty()) {
-				if (htmlLine.contains("<div class=\"story-body\">")) {
+				if (htmlLine.contains("<div class=\"article-text\">")) {
 					slicing = true;
 					postHtml = "";
 				}
 				
-				if (htmlLine.endsWith("<!-- / story-body -->")) {
+				if (htmlLine.endsWith("<div class=\"noline\"></div>")) {
 					slicing = false;
 				}
 				
@@ -121,6 +121,9 @@ public class BBCNewsReader implements NewsReader {
 		}
 		
 		return postHtml;
+		
 	}
+	
+	
 
 }

@@ -9,7 +9,7 @@ public interface NewsReader {
 	
 	/* RSS Feeds */
 	
-	List<NewsArticle> processRSSfeed(String reeFeedUrl) throws IOException;
+	List<NewsArticle> processRSSfeed(String rssFeedUrl) throws IOException;
 	
 	
 	/* Web Crawling for individual Article content */

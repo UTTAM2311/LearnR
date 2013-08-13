@@ -27,11 +27,11 @@ public class ReaderTest {
 	@Test
 	public void fetchRSSFeedsTest() throws Exception {
 		
-		String hindu = "http://www.hindu.com/rss/01hdline.xml";
+		String hindu = "http://www.thehindu.com/news/international/?service=rss";
 		String bbcWorld = "http://feeds.bbci.co.uk/news/world/rss.xml";
 		String googleRss = "https://news.google.com/news/feeds?pz=1&cf=all&ned=in&hl=en&output=rss";
 		
-		URL url = new URL(bbcWorld);
+		URL url = new URL(hindu);
 		XmlReader reader = null;
 
 		try {
@@ -77,7 +77,8 @@ public class ReaderTest {
 	public void crawlForContentTest() throws Exception {
 		
 //		String pageUrlStr = "http://www.bbc.co.uk/news/world-latin-america-23166213";
-		String pageUrlStr = "http://www.nytimes.com/2007/12/31/world/africa/31kenya.html";
+//		String pageUrlStr = "http://www.nytimes.com/2007/12/31/world/africa/31kenya.html";
+		String pageUrlStr = "http://www.thehindu.com/news/international/world/suicide-bombing-kills-24-at-iraqi-cafe/article5018301.ece";
 		
 		URL pageUrl = new URL(pageUrlStr);
 		
@@ -92,16 +93,13 @@ public class ReaderTest {
 		String postHtml = "";
 		while ((htmlLine = pageHtml.readLine()) != null) {
 			htmlLine.trim();
-			
-			System.out.println(htmlLine);
-			
 			if (!htmlLine.isEmpty()) {
-				if (htmlLine.contains("<div id=\"articleBody\">")) {
+				if (htmlLine.contains("<div class=\"article-text\">")) {
 					slicing = true;
 					postHtml = "";
 				}
 				
-				if (htmlLine.endsWith("<!--story end -->")) {
+				if (htmlLine.endsWith("<div class=\"noline\"></div>")) {
 					slicing = false;
 				}
 				
