@@ -2,6 +2,10 @@
 # coding=utf-8
 __author__ = 'Sriram Velamur'
 
+#pylint:disable=E1103
+# Disables
+# E1103 : Non inferred firstChild member from minidom
+
 import sys
 sys.dont_write_bytecode = True
 import requests
@@ -12,16 +16,18 @@ import re
 class Search(object):
     """Search class"""
 
-    def __init__(self, query=None):
+    def __init__(self, query=None, search_url=None):
         """
         Search class init.
         :param query: str|unicode. Base query string to bootstrap class
+        @todo: Config dict for class init to specify url source, meta.
         """
         if not isinstance(query, (str, unicode, list, tuple)):
             raise Exception("No query. Exiting")
 
         # Google search feeds url
-        search_url = "https://news.google.com/news/feeds?output=rss&q="
+        search_url = search_url or \
+            "https://news.google.com/news/feeds?output=rss&q="
 
         # Set up a local dict and populate values from locals
         fields = "query*data*search_url*matcher".split("*")
@@ -40,6 +46,8 @@ class Search(object):
 
         self.desc_matcher = re.compile(
             '<div class="lh">.*?<b>(.*?)<a class="p".*')
+
+        self.items = None
 
     def get_url(self, url):
         """Regex filter to extract actual url to article"""
@@ -88,10 +96,12 @@ class Search(object):
             item.pop("guid")
             pdesc = self.get_desc(item["description"])
             item["description"] = pdesc
-            item["source"] = key.split("-")[1].strip() if len(key.split("-")) >= 2 else None
-            item["title"] = key.split("-")[0].strip() if len(key.split("-")) >= 2 else None
+            item["source"] = key.split("-")[1].strip() if\
+                                len(key.split("-")) >= 2 else None
+            item["title"] = key.split("-")[0].strip() if \
+                                len(key.split("-")) >= 2 else None
             item["description"] = item["description"].replace(key, "")
-            item["pub_date"] = datetime.strptime("", item["pubDate"])
+            item["pub_date"] = item["pubDate"]
             item.pop("pubDate")
 
         setattr(self, "items", items_data)
@@ -139,6 +149,13 @@ class Search(object):
 
 
 if __name__ == '__main__':
-    SEARCH_INST = Search("deaths")
-    SEARCH_INST.search(filter_qs="more than")
-    print SEARCH_INST.items
+    try:
+        SEARCH_INST = Search("deaths")
+        SEARCH_INST.search(filter_qs="more than")
+        S_RESP = str(SEARCH_INST.items)
+        S_RESP = S_RESP.replace("u'", '"').replace("',", '"')
+        S_RESP = S_RESP.replace("'}", '"')
+        with open("../data_store/py_data.json", "a") as data_file:
+            data_file.write(S_RESP)
+    except KeyboardInterrupt:
+        quit("")
