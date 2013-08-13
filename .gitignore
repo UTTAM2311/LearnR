@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+
+/.settings/
+/.dropbox
+/.project
+/.classpath
+/.springBeans
+/.externalToolBuilders
+/target/
+/target/**
+**.pyc
