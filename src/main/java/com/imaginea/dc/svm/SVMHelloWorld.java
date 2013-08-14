@@ -42,7 +42,7 @@ public class SVMHelloWorld {
 		
 		problem.x = nodes;
 		problem.y = y;
-		problem.l = 1;
+		problem.l = 10;
 		
 		SVMEngine engine = new SVMEngine();
 		SVMParams params = new SVMParams();
