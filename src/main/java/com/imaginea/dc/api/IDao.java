@@ -69,4 +69,5 @@ public interface IDao{
 	
 	<E extends IEntity> List<E> searchEntityByField(Class<E> inEntityClass, List<String> projections, String entityField, String searchString, Integer pageNum, Integer pageSize);
 	
+	public Object executeResult(String queryName, Hashtable<String, Object> criteria)throws DataAccessException;
 }

@@ -22,11 +22,12 @@ public class SVMHelloWorld {
 
 		SVNProblem problem = new SVNProblem();
 		
-		FeatureNode[][] nodes = new FeatureNode[10][10];
+		FeatureNode[][] nodes = new FeatureNode[20000][20000];
+		
 		
 		int index = 1;
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
+		for (int i = 0; i < 20000; i++) {
+			for (int j = 0; j < 20000; j++) {
 				FeatureNode node = new FeatureNode();
 				node.index = index ++;
 				node.value = 1.0;
@@ -34,15 +35,15 @@ public class SVMHelloWorld {
 			}
 		}
 		
-		double[] y = new double[10];
-		for (int i=0;i<5;i++){
+		double[] y = new double[20000];
+		for (int i=0;i<1000;i++){
 			y[i] = 1.0;
 			y[i+5] = -1.0;
 		}
 		
 		problem.x = nodes;
 		problem.y = y;
-		problem.l = 10;
+		problem.l = 20000;
 		
 		SVMEngine engine = new SVMEngine();
 		SVMParams params = new SVMParams();
@@ -51,9 +52,9 @@ public class SVMHelloWorld {
 		
 		engine.svm_save_model("test.model", model);
 		
-		FeatureNode[] xTest = new FeatureNode[10];
+		FeatureNode[] xTest = new FeatureNode[20000];
 		
-		for (int i=0;i<10;i++){
+		for (int i=0;i<20000;i++){
 			FeatureNode nodeTest = new FeatureNode();
 			nodeTest.index = i;
 			nodeTest.value = 1.0;

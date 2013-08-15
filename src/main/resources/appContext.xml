@@ -144,6 +144,9 @@
 
 	<bean id="textProcessingUtil" class="com.imaginea.dc.utils.TextProcessingUtil" />
 		
+	<!-- Preprocessing Data -->	
+	<bean id="dataPreProcessingService" class="com.imaginea.dc.service.impl.DataPreProcessingServiceImpl" />
+	<bean id="preprocessData" class="com.imaginea.dc.preprocesor.PreprocessData" />	
 	
 </beans>
 

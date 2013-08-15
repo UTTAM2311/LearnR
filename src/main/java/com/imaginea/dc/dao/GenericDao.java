@@ -234,6 +234,32 @@ public class GenericDao implements IDao {
 	}
 	
 	
+	public Object executeResult(String queryName, Hashtable<String, Object> criteria)
+	{
+		Query qry = getQuery(queryName, criteria);
+		Object result;
+		try {
+			result = qry.executeUpdate();
+		} catch (NoResultException nre) {
+			return null;
+		}
+		finally{
+			entityManager.close();
+		}
+		return result;
+	}
+	
+	private Query getQuery(String queryName, Hashtable<String, Object> criteria) {
+		Query qry = entityManager.createNamedQuery(queryName);
+		Enumeration<String> keys = criteria.keys();
+		while (keys.hasMoreElements()) {
+			String key = keys.nextElement();
+			qry.setParameter(key, criteria.get(key));
+		}
+		return qry;
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public <E extends IEntity, obj extends Object> List<E> getEntities(Class<E> inElementClass, String queryName, 
 					Hashtable<String, obj> criteria, Integer pageNumber, Integer pageSize) throws DataAccessException {
