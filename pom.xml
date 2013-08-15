@@ -26,6 +26,7 @@
 			<scope>test</scope>
 		</dependency>
 
+
 		<!-- Rome : RSS Feed -->
 
 		<dependency>
@@ -47,6 +48,31 @@
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
 		    <version>3.9</version>
+		</dependency>
+		
+		
+		<!-- Lucene -->
+		
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers</artifactId>
+			<version>3.6.2</version>
+		</dependency>
+            
+		
+		
+		<!-- LibSVM -->
+		
+		<dependency>
+			<groupId>tw.edu.ntu.csie</groupId>
+			<artifactId>libsvm</artifactId>
+			<version>3.1</version>
 		</dependency>
 
 
