@@ -9,7 +9,8 @@ import java.net.URLConnection;
 import java.util.List;
 
 import com.imaginea.dc.api.NewsReader;
-import com.imaginea.dc.beans.NewsArticle;
+import com.imaginea.dc.entities.NewsArticle;
+import com.imaginea.dc.utils.TextProcessingUtil;
 
 public class NyTimesNewsReader implements NewsReader {
 
@@ -47,6 +48,9 @@ public class NyTimesNewsReader implements NewsReader {
 				}
 			}
 		}
+		
+		// HTML Stripping
+		postHtml = TextProcessingUtil.stripHtml(postHtml);
 		
 		return postHtml;
 	}

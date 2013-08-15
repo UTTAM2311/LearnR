@@ -3,6 +3,7 @@ package com.imaginea.dc.newsreaders;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -10,9 +11,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.lucene.analysis.CharReader;
+import org.apache.lucene.analysis.charfilter.HTMLStripCharFilter;
+
 import com.imaginea.dc.api.NewsReader;
-import com.imaginea.dc.beans.NewsArticle;
 import com.imaginea.dc.constants.NewsSource;
+import com.imaginea.dc.entities.NewsArticle;
+import com.imaginea.dc.utils.TextProcessingUtil;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -120,7 +125,12 @@ public class BBCNewsReader implements NewsReader {
 			}
 		}
 		
+		// HTML Stripping
+		postHtml = TextProcessingUtil.stripHtml(postHtml);
+		
 		return postHtml;
 	}
+	
+
 
 }

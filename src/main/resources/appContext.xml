@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd" >
+
+	
+	<!-- Basic Framework Configuration -->
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:deathcluster.properties</value>
+			</list>
+		</property>
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="searchSystemEnvironment" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="false" />
+	</bean>
+	
+
+	<!-- Entity manager -->
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="${dc.db}" />
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+			</bean>
+		</property>
+		<property name="jpaPropertyMap">
+			<map>
+				<entry key="hibernate.connection.driver_class" value="${dc.db.driverClassName}" />
+                <entry key="hibernate.connection.url" value="${dc.db.url}" />
+                <entry key="hibernate.connection.username" value="${dc.db.username}" />
+                <entry key="hibernate.connection.password" value="${dc.db.password}" />
+				<entry key="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
+				
+				<entry key="hibernate.c3p0.min_size" value="${hibernate.c3p0.min_size}" />
+				<entry key="hibernate.c3p0.max_size" value="${hibernate.c3p0.max_size}" />
+				<entry key="hibernate.c3p0.timeout" value="${hibernate.c3p0.timeout}" />
+				<entry key="hibernate.c3p0.max_statements" value="50"/> 
+				
+				<entry key="hibernate.dialect" value="${hibernate.dialect}"/>
+			</map>
+		</property>
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+		<property name="persistenceUnitName" value="punit" />
+	</bean>
+
+	
+	<!-- beans -->
+	
+	<!-- Message Source -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- JPA Beans Processor -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- DataSource and EntityManager are defined in the parent XML based on the environment -->
+
+	<context:annotation-config />
+
+	<!-- 
+	<context:component-scan base-package="com.imaginea.dc" />
+	 -->
+
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/pages/" />
+		<property name="suffix" value=".jsp" />
+		<property name="redirectHttp10Compatible" value="false" />
+	</bean>
+
+
+	<!-- Message Converters -->
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Transaction manager -->
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+	<!-- Data Access Objects -->
+
+	<bean id="genericDao" class="com.imaginea.dc.dao.GenericDao" />
+
+
+	<!-- Services -->
+
+	<bean id="newsReaderService" class="com.imaginea.dc.service.impl.NewsReaderServiceImpl"> 
+		<property name="genericDao" ref="genericDao" />
+		<property name="bbcNewsReader" ref="bbcNewsReader" />
+		<property name="hinduNewsReader" ref="hinduNewsReader" />
+		<property name="nyTimesNewsReader" ref="nyTimesNewsReader" />
+	</bean>
+
+
+	<!-- NewsReader -->
+	
+	<bean id="bbcNewsReader" class="com.imaginea.dc.newsreaders.BBCNewsReader" />
+	
+	<bean id="hinduNewsReader" class="com.imaginea.dc.newsreaders.HinduNewsReader" />
+	
+	<bean id="nyTimesNewsReader" class="com.imaginea.dc.newsreaders.NyTimesNewsReader" />
+	
+	
+
+
+	<!-- Utils -->
+	
+	<bean id="excelUtil" class="com.imaginea.dc.utils.ExcelUtil" />
+
+	<bean id="textProcessingUtil" class="com.imaginea.dc.utils.TextProcessingUtil" />
+		
+	
+</beans>
+
+

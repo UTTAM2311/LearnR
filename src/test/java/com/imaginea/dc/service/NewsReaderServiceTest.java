@@ -1,19 +1,25 @@
 package com.imaginea.dc.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.imaginea.dc.beans.NewsArticle;
-import com.imaginea.dc.service.impl.NewsReaderServiceImpl;
-import com.imaginea.dc.utils.ExcelUtil;
+import com.imaginea.dc.entities.NewsArticle;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations={
+	"classpath:appContext.xml"
+})
 public class NewsReaderServiceTest {
 	
-	NewsReaderService _readerService = new NewsReaderServiceImpl();
+	@Autowired
+	private NewsReaderService _readerService;
 
 	@Test
 	public void testNewsArticlesToExcelExport() throws Exception {
@@ -23,5 +29,7 @@ public class NewsReaderServiceTest {
 		Assert.assertTrue(newsFeeds.size() > 0);
 		
 	}
+
+	
 	
 }

@@ -11,8 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.imaginea.dc.api.NewsReader;
-import com.imaginea.dc.beans.NewsArticle;
 import com.imaginea.dc.constants.NewsSource;
+import com.imaginea.dc.entities.NewsArticle;
+import com.imaginea.dc.utils.TextProcessingUtil;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -119,6 +120,9 @@ public class HinduNewsReader implements NewsReader {
 				}
 			}
 		}
+		
+		// HTML Stripping
+		postHtml = TextProcessingUtil.stripHtml(postHtml);
 		
 		return postHtml;
 		

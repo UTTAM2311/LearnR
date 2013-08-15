@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.imaginea.dc.beans.NewsArticle;
+import com.imaginea.dc.entities.NewsArticle;
 
 public class ExcelUtilTest {
 

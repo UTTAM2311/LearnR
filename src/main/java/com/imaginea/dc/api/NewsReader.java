@@ -3,7 +3,7 @@ package com.imaginea.dc.api;
 import java.io.IOException;
 import java.util.List;
 
-import com.imaginea.dc.beans.NewsArticle;
+import com.imaginea.dc.entities.NewsArticle;
 
 public interface NewsReader {
 	

@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.imaginea.dc.beans.NewsArticle;
+import com.imaginea.dc.entities.NewsArticle;
 
 public class ExcelUtil {
 	

@@ -1,7 +1,9 @@
 package com.imaginea.dc.rss;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -11,11 +13,13 @@ import javax.swing.text.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.lucene.analysis.CharReader;
+import org.apache.lucene.analysis.charfilter.HTMLStripCharFilter;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-import com.imaginea.dc.beans.NewsArticle;
+import com.imaginea.dc.entities.NewsArticle;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -108,6 +112,26 @@ public class ReaderTest {
 				}
 			}
 		}
+		
+		StringBuilder out = new StringBuilder();
+		StringReader strReader = new StringReader(postHtml);
+		try {
+			HTMLStripCharFilter html = new HTMLStripCharFilter(
+					CharReader.get(strReader.markSupported() ? strReader : new BufferedReader(strReader)));
+			char[] cbuf = new char[1024 * 10];
+			while (true) {
+				int count = html.read(cbuf);
+				if (count == -1)
+					break; // end of stream mark is -1
+				if (count > 0)
+					out.append(cbuf, 0, count);
+			}
+			html.close();
+		} catch (IOException e) {
+			throw e;
+		}
+
+		postHtml = out.toString();
 		
 		System.out.println(postHtml);
 		
