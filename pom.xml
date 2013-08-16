@@ -348,6 +348,13 @@
 			<version>1.0</version>
 			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/TopicMiner.jar</systemPath>
 		</dependency>
+		
+		<dependency>
+			<groupId>libsvm</groupId>
+			<artifactId>LibSVM</artifactId>
+			<version>1.0</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/libsvm.jar</systemPath>
+		</dependency>
 
 
 	</dependencies>
