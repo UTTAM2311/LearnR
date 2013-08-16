@@ -305,7 +305,49 @@
 			<version>3.1</version>
 		</dependency>
 		
+		<!-- Preprocessing of Data -->
 		
+		<dependency>
+			<groupId>textProcessor</groupId>
+			<artifactId>TextProcessor</artifactId>
+			<version>1.0</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/TextProcessor.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>2.2</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/commons-math-2.2.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>models</groupId>
+			<artifactId>models</artifactId>
+			<version>1.0</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/models.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>opennlp</groupId>
+			<artifactId>opennlp-maxent</artifactId>
+			<version>1.0</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/opennlp-maxent-3.0.1-incubating.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>opennlp</groupId>
+			<artifactId>opennlp-tools</artifactId>
+			<version>1.0</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/opennlp-tools-1.5.1-incubating.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>tm</groupId>
+			<artifactId>TopicMiner</artifactId>
+			<version>1.0</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/TopicMiner.jar</systemPath>
+		</dependency>
 
 
 	</dependencies>
