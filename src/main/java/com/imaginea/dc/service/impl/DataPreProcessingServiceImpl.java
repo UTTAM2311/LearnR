@@ -48,8 +48,10 @@ public class DataPreProcessingServiceImpl implements DataPreProcessingService {
 		Iterator<String> dataIterator = data.iterator();
 		while (dataIterator.hasNext()){
 			String svmData = dataIterator.next();
+			String outputVal= ""+svmData.charAt(0);
 			SVMInput input = new SVMInput();
-			input.setInputLine(svmData);
+			input.setInputLine(svmData.substring(1).trim());
+			input.setOutputValue(outputVal);
 			dao.save(input);
 		}
 	}
@@ -57,6 +59,20 @@ public class DataPreProcessingServiceImpl implements DataPreProcessingService {
 	public void saveWordList(ArrayList<String> wordList) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ArrayList<String> getSVMInputData() {
+		// TODO Auto-generated method stub
+		Hashtable criteria = new Hashtable();
+		ArrayList<String> data = (ArrayList<String>) dao.getEntities(SVMInput.class, "svm_input.fetchinputline", criteria);		
+		return data;
+	}
+
+	public ArrayList<String> getOutputValues() {
+		// TODO Auto-generated method stub
+		Hashtable criteria = new Hashtable();
+		ArrayList<String> data = (ArrayList<String>) dao.getEntities(SVMInput.class, "svm_input.fetchoutpuvalues", criteria);		
+		return data;
 	}
 
 	

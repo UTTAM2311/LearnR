@@ -18,17 +18,25 @@ public class TextProcessorDC extends TextProcessor {
 
 	private List<NewsArticle> newsArticleList;
 	
+	private List<String> testData;
+	
 	public TextProcessorDC(Options options){
 		super(options);
 	}
 	
 	public void buildDocStringArrayFromMergedFile(){
-		if (newsArticleList == null){
-			super.buildDocStringArrayFromMergedFile();
-			return;
-		}
+		
 		
 		docStringArray.clear();
+		
+		if (testData != null && testData.size() > 0){
+			Iterator<String> testDataIterator = testData.iterator();
+			while (testDataIterator.hasNext()){
+				String data = testDataIterator.next();
+				docStringArray.add(data);
+			}
+		}		
+		else if (newsArticleList != null && newsArticleList.size() > 0){
 		Iterator<NewsArticle> iterator = newsArticleList.iterator();
 		while (iterator.hasNext()){
 			NewsArticle article = iterator.next();
@@ -39,6 +47,12 @@ public class TextProcessorDC extends TextProcessor {
 			else
 				content = "0	"+content;
 			docStringArray.add(content);
+		}
+		}
+		
+		if (newsArticleList == null && testData == null){
+			super.buildDocStringArrayFromMergedFile();
+			return;
 		}
 	}
 
@@ -89,5 +103,13 @@ public class TextProcessorDC extends TextProcessor {
             e.printStackTrace();
         }
     }
+
+	public List<String> getTestData() {
+		return testData;
+	}
+
+	public void setTestData(List<String> testData) {
+		this.testData = testData;
+	}
 	
 }

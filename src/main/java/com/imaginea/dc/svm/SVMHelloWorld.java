@@ -3,6 +3,7 @@ package com.imaginea.dc.svm;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -22,17 +23,19 @@ public class SVMHelloWorld {
 
 		SVNProblem problem = new SVNProblem();
 		
-		FeatureNode[][] nodes = new FeatureNode[20000][20000];
+		ArrayList<ArrayList<FeatureNode>> nodes = new ArrayList<ArrayList<FeatureNode>>();
 		
 		
 		int index = 1;
 		for (int i = 0; i < 20000; i++) {
+			ArrayList<FeatureNode> featureNode = new ArrayList<FeatureNode>();
 			for (int j = 0; j < 20000; j++) {
 				FeatureNode node = new FeatureNode();
 				node.index = index ++;
 				node.value = 1.0;
-				nodes[i][j] = node;
+				featureNode.add(node);
 			}
+			nodes.add(featureNode);
 		}
 		
 		double[] y = new double[20000];
@@ -41,7 +44,16 @@ public class SVMHelloWorld {
 			y[i+5] = -1.0;
 		}
 		
-		problem.x = nodes;
+		FeatureNode[][] array = new FeatureNode[nodes.size()][];
+		for (int i = 0; i < nodes.size(); i++) {
+		    ArrayList<FeatureNode> row = nodes.get(i);
+		    array[i] = row.toArray(new FeatureNode[row.size()]);
+		}
+		
+		
+		
+		
+		problem.x = array;
 		problem.y = y;
 		problem.l = 20000;
 		

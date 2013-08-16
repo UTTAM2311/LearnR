@@ -12,5 +12,7 @@ public interface DataPreProcessingService {
 	void saveWordCount(HashMap<String, Integer> wordCount);
 	void saveSVMInputData(ArrayList<String> data);
 	void saveWordList(ArrayList<String> wordList);
+	ArrayList<String> getSVMInputData();
+	ArrayList<String> getOutputValues();
 	
 }
