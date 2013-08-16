@@ -351,9 +351,9 @@
 		
 		<dependency>
 			<groupId>libsvm</groupId>
-			<artifactId>LibSVM</artifactId>
+			<artifactId>jlibsvm</artifactId>
 			<version>1.0</version>
-			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/libsvm.jar</systemPath>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/jlibsvm.jar</systemPath>
 		</dependency>
 
 
