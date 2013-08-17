@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -14,21 +16,25 @@ import javax.persistence.UniqueConstraint;
 	@UniqueConstraint(columnNames = { "title", "published_date" })
 })
 @NamedQueries({
-	@NamedQuery(name = "news_articles.fetchByTitleAndDate", 
-			query = "SELECT instance FROM NewsArticle instance WHERE instance.title = :title AND instance.publishedDate = :publishedDate")
+	@NamedQuery(name = "newsArticle.fetchByTitle", query = "SELECT instance FROM NewsArticle instance WHERE instance.title = :title"),
+	@NamedQuery(name = "newsArticle.fetchAllUnblabelled", query = "SELECT instance FROM NewsArticle instance WHERE instance.isPositive IS NULL"),
+	@NamedQuery(name = "newsArticle.fetchLabelled", query = "SELECT instance FROM NewsArticle instance WHERE instance.isPositive IS NOT NULL")
 })
 public class NewsArticle extends BaseEntity {
 
 	private Boolean isPositive;
+	private Integer deathCount;
+	
+	private Cause cause;
+	
+	private String location;
+	private Date publishedDate;
+	private Date updatedDate;
 
 	private String source;
 	
 	private String publisher;
 	private String author;
-
-	private String location;
-	private Date publishedDate;
-	private Date updatedDate;
 
 	private String url;
 
@@ -68,31 +74,23 @@ public class NewsArticle extends BaseEntity {
 		this.isPositive = isPositive;
 	}
 
-	@Column(name = "source")
-	public String getSource() {
-		return source;
+	@Column(name = "death_count")
+	public Integer getDeathCount() {
+		return deathCount;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setDeathCount(Integer deathCount) {
+		this.deathCount = deathCount;
+	}
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "cause")
+	public Cause getCause() {
+		return cause;
 	}
 
-	@Column(name = "publisher")
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	@Column(name = "author")
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setCause(Cause cause) {
+		this.cause = cause;
 	}
 
 	@Column(name = "location")
@@ -120,6 +118,33 @@ public class NewsArticle extends BaseEntity {
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	@Column(name = "source")
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	@Column(name = "publisher")
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	@Column(name = "author")
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	@Column(name = "url")

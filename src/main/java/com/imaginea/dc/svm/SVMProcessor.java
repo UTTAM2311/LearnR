@@ -20,7 +20,7 @@ public class SVMProcessor {
 	
 	private SVMModel model;
 	
-	private SVMEngine engine = new SVMEngine();
+//	private SVMEngine engine = new SVMEngine();
 	
 	public void train() throws Exception{
 	
@@ -51,9 +51,9 @@ public class SVMProcessor {
 	
 	SVMParams params = new SVMParams();
 	
-	model = engine.svm_train(problem, params);
-	
-	engine.svm_save_model("test.model", model);
+//	model = engine.svm_train(problem, params);
+//	
+//	engine.svm_save_model("test.model", model);
 	
 	/*FeatureNode[] xTest = new FeatureNode[20000];
 	
@@ -117,8 +117,8 @@ public class SVMProcessor {
 			while (featureNodesIterator.hasNext()){
 				featureNodeArray[i++] = featureNodesIterator.next(); 
 			}
-			double yTest = engine.svm_predict(model, featureNodeArray);
-			output[count] = yTest;
+//			double yTest = engine.svm_predict(model, featureNodeArray);
+//			output[count] = yTest;
 		}		
 		return output;
 	}

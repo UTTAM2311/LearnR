@@ -15,12 +15,16 @@ public interface NewsReaderService {
 	void updateNewsArticle(NewsArticle article);
 	
 	void deleteNewsArticle(Integer pkey);
-
 	
-	/* RSS Feeds */
 	
-	List<NewsArticle> fetchNewsFromRSSFeeds();
-
+	List<NewsArticle> readNewsArticle(String title);
+	
+	List<NewsArticle> fetchAllArticles();
+	
+	
+	List<NewsArticle> fetchAllUnlabelledArticles();
+	
+	List<NewsArticle> fetchArticlesForTraining();
 	
 
 }
