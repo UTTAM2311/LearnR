@@ -26,6 +26,9 @@
 				<li>
 					<a href="<%= request.getContextPath() %>/feed/unlabelled">Unlabelled Articles</a>
 				</li>
+				<li>
+					<a href="<%= request.getContextPath() %>/feed/labelled">Labelled Articles</a>
+				</li>
 			</ul>
 		</div>
 	</div>

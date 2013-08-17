@@ -26,6 +26,9 @@
 				<li>
 					<a href="<%= request.getContextPath() %>/feed/unlabelled">Unlabelled Articles</a>
 				</li>
+				<li>
+					<a href="<%= request.getContextPath() %>/feed/labelled">Labelled Articles</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -37,8 +40,9 @@
 		
 			<div class="mc-rounded">
 				<div>
-					<a href="<%= request.getContextPath() %>/feed/edit?pkey=${newsArticle.pkey - 1}"> PrevArticle </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					<a href="<%= request.getContextPath() %>/feed/edit?pkey=${newsArticle.pkey + 1}"> NextArticle </a>
+					<a href="<%= request.getContextPath() %>/feed/view?pkey=${newsArticle.pkey - 1}"> PrevArticle </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					<a href="<%= request.getContextPath() %>/feed/edit?pkey=${newsArticle.pkey}"> Edit this Article </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					<a href="<%= request.getContextPath() %>/feed/view?pkey=${newsArticle.pkey + 1}"> NextArticle </a>
 				</div>
 				
 				<!-- Application Form -->

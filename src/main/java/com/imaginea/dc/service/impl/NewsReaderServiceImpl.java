@@ -71,10 +71,18 @@ public class NewsReaderServiceImpl implements NewsReaderService {
 		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchByTitle", criteria);
 	}
 	
+	
 	public List<NewsArticle> fetchAllArticles() {
 		return genericDao.findAllEntities(NewsArticle.class);
 	}
+	
+	public List<NewsArticle> fetchArticlesBySource(String source){
+		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
+		criteria.put("source", source);
+		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchBySource", criteria);
+	}
 
+	
 	public List<NewsArticle> fetchAllUnlabelledArticles() {
 		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
 		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchAllUnblabelled", criteria);

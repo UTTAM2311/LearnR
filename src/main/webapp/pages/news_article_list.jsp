@@ -25,6 +25,9 @@
 				<li>
 					<a href="<%= request.getContextPath() %>/feed/unlabelled">Unlabelled Articles</a>
 				</li>
+				<li>
+					<a href="<%= request.getContextPath() %>/feed/labelled">Labelled Articles</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -53,8 +56,8 @@
 							<td> ${article.location} </td>
 							<td> <a href="${article.url}" target="_blank"> ${article.title} </a> </td>
 							<td> ${article.source} </td>
-							<td> <a href="<%= request.getContextPath() %>/feed/edit?pkey=${article.pkey}" target="_blank"> edit </a> </td>
-							<td> <a href="<%= request.getContextPath() %>/feed/view?pkey=${article.pkey}" target="_blank"> view </a> </td>
+							<td> <a href="<%= request.getContextPath() %>/feed/edit?pkey=${article.pkey}"> edit </a> </td>
+							<td> <a href="<%= request.getContextPath() %>/feed/view?pkey=${article.pkey}"> view </a> </td>
 						</tr>
 					</c:forEach>
 				</tbody>

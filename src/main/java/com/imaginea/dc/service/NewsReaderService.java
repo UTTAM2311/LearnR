@@ -19,7 +19,10 @@ public interface NewsReaderService {
 	
 	List<NewsArticle> readNewsArticle(String title);
 	
+	
 	List<NewsArticle> fetchAllArticles();
+	
+	List<NewsArticle> fetchArticlesBySource(String source);
 	
 	
 	List<NewsArticle> fetchAllUnlabelledArticles();

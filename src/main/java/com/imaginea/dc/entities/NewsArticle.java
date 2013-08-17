@@ -18,7 +18,8 @@ import javax.persistence.UniqueConstraint;
 @NamedQueries({
 	@NamedQuery(name = "newsArticle.fetchByTitle", query = "SELECT instance FROM NewsArticle instance WHERE instance.title = :title"),
 	@NamedQuery(name = "newsArticle.fetchAllUnblabelled", query = "SELECT instance FROM NewsArticle instance WHERE instance.isPositive IS NULL"),
-	@NamedQuery(name = "newsArticle.fetchLabelled", query = "SELECT instance FROM NewsArticle instance WHERE instance.isPositive IS NOT NULL")
+	@NamedQuery(name = "newsArticle.fetchLabelled", query = "SELECT instance FROM NewsArticle instance WHERE instance.isPositive IS NOT NULL"),
+	@NamedQuery(name = "newsArticle.fetchBySource", query = "SELECT instance FROM NewsArticle instance WHERE instance.source = :source ")
 })
 public class NewsArticle extends BaseEntity {
 
@@ -165,7 +166,7 @@ public class NewsArticle extends BaseEntity {
 		this.title = title;
 	}
 
-	@Column(name = "description")
+	@Column(name = "description", columnDefinition = "TEXT")
 	public String getDescription() {
 		return description;
 	}
