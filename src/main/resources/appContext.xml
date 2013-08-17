@@ -156,8 +156,9 @@
 	<bean id="preprocessData" class="com.imaginea.dc.preprocesor.PreprocessData" />	
 	
 	<bean id="svmProcessor" class="com.imaginea.dc.svm.SVMProcessor" />
-		
-	
+	 	
+	<bean id="SVMModel" class="libsvm.model.SVMEngine" />	
+	 
 	<!-- CronJobs -->
 	
 	<task:annotation-driven />

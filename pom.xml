@@ -365,10 +365,10 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>libsvm</groupId>
-			<artifactId>jlibsvm</artifactId>
-			<version>1.0</version>
-			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/jlibsvm.jar</systemPath>
+			<groupId>libsvm-api</groupId>
+			<artifactId>libsvm-api</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/lib/libsvm-api-0.0.2-SNAPSHOT.jar</systemPath>
 		</dependency>
 
 

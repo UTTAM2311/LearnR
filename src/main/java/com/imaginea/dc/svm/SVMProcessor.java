@@ -20,7 +20,10 @@ public class SVMProcessor {
 	
 	private SVMModel model;
 	
-//	private SVMEngine engine = new SVMEngine();
+	@Autowired
+	private SVMEngine engine;
+	
+	private int trainingPercentage = 70;
 	
 	public void train() throws Exception{
 	
@@ -33,7 +36,8 @@ public class SVMProcessor {
 	ArrayList outputValues = this.getOutputValues(ouputValues);
 	
 	FeatureNode[][] array = new FeatureNode[nodes.size()][];
-	for (int i = 0; i < nodes.size(); i++) {
+	int trainCount = nodes.size() * trainingPercentage/100;
+	for (int i = 0; i< trainCount; i++) {
 	    ArrayList<FeatureNode> row = (ArrayList<FeatureNode>) nodes.get(i);
 	    array[i] = row.toArray(new FeatureNode[row.size()]);
 	}
@@ -46,26 +50,31 @@ public class SVMProcessor {
 	
 	problem.x = array;
 	problem.y = y;
-	problem.l = nodes.size();
+	problem.l = trainCount;
 	
 	
 	SVMParams params = new SVMParams();
+	params.kernel_type = 3;
 	
-//	model = engine.svm_train(problem, params);
-//	
-//	engine.svm_save_model("test.model", model);
+	model = engine.svm_train(problem, params);
 	
-	/*FeatureNode[] xTest = new FeatureNode[20000];
+	engine.svm_save_model("test.model", model);
 	
-	for (int i=0;i<20000;i++){
-		FeatureNode nodeTest = new FeatureNode();
-		nodeTest.index = i;
-		nodeTest.value = 1.0;
-		
-		xTest[i] = nodeTest;
+	
+	//FeatureNode[] testarray = new FeatureNode[nodes.size() - trainCount];
+	int accuracy = 100;
+	int testCount = (nodes.size()-trainCount);
+	for (int i=trainCount;i<nodes.size();i++){
+		ArrayList<FeatureNode> row = (ArrayList<FeatureNode>) nodes.get(i);
+		double yTest = engine.svm_predict(model, row.toArray(new FeatureNode[row.size()]));
+		System.out.println("===============================>>>>> Actual Value :"+y[i]+"======================= Predicted Value :"+yTest);
+		if (y[i] != yTest)
+		{
+			accuracy = accuracy - (100 / testCount);			
+		}
+	    
 	}
-	double yTest = engine.svm_predict(model, xTest);
-	System.out.println("Predicted Output value :"+yTest);*/
+	System.out.println("Accurracy :"+accuracy +" %");
 	}	
 	
 	private ArrayList getFeatureNodes(ArrayList<String> data){
@@ -117,8 +126,8 @@ public class SVMProcessor {
 			while (featureNodesIterator.hasNext()){
 				featureNodeArray[i++] = featureNodesIterator.next(); 
 			}
-//			double yTest = engine.svm_predict(model, featureNodeArray);
-//			output[count] = yTest;
+			double yTest = engine.svm_predict(model, featureNodeArray);
+			output[count] = yTest;
 		}		
 		return output;
 	}

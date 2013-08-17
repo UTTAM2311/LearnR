@@ -52,7 +52,7 @@ public class PreprocessData {
 	}
 	
 	public ArrayList<String> convertStringToSVMInput(ArrayList<String> inputData){
-		String workSpacePath = "\\";
+		String workSpacePath = "C:\\Users\\prasannav\\git\\DeathCluster\\data";
 		String mergedFileName = "testdatainput.txt";
 		String dataDirName = "output";
 		String ext = "txt";
