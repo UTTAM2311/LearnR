@@ -77,82 +77,8 @@ public class ReaderTest {
 
 	}
 	
-	@Test
-	public void crawlForContentTest() throws Exception {
-		
-//		String pageUrlStr = "http://www.bbc.co.uk/news/world-latin-america-23166213";
-//		String pageUrlStr = "http://www.nytimes.com/2007/12/31/world/africa/31kenya.html";
-		String pageUrlStr = "http://www.thehindu.com/news/international/world/suicide-bombing-kills-24-at-iraqi-cafe/article5018301.ece";
-		
-		URL pageUrl = new URL(pageUrlStr);
-		
-		URLConnection uconn = pageUrl.openConnection();
-		HttpURLConnection conn = (HttpURLConnection) uconn;
-		BufferedReader pageHtml = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-		// Extract days
-		boolean slicing = false;
-
-		String htmlLine = "";
-		String postHtml = "";
-		while ((htmlLine = pageHtml.readLine()) != null) {
-			htmlLine.trim();
-			if (!htmlLine.isEmpty()) {
-				if (htmlLine.contains("<div class=\"article-text\">")) {
-					slicing = true;
-					postHtml = "";
-				}
-				
-				if (htmlLine.endsWith("<div class=\"noline\"></div>")) {
-					slicing = false;
-				}
-				
-				if (slicing) {
-					postHtml += htmlLine;
-				}
-			}
-		}
-		
-		StringBuilder out = new StringBuilder();
-		StringReader strReader = new StringReader(postHtml);
-		try {
-			HTMLStripCharFilter html = new HTMLStripCharFilter(
-					CharReader.get(strReader.markSupported() ? strReader : new BufferedReader(strReader)));
-			char[] cbuf = new char[1024 * 10];
-			while (true) {
-				int count = html.read(cbuf);
-				if (count == -1)
-					break; // end of stream mark is -1
-				if (count > 0)
-					out.append(cbuf, 0, count);
-			}
-			html.close();
-		} catch (IOException e) {
-			throw e;
-		}
-
-		postHtml = out.toString();
-		
-		System.out.println(postHtml);
-		
-		
-	}
 	
-	@Test
-	public void crawlForContentDomTest() throws Exception {
-		
-		
-		URL pageUrl = new URL("http://www.bbc.co.uk/news/world-latin-america-23166213");
-		
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		DocumentBuilder db = dbf.newDocumentBuilder();
-		Document doc = db.parse(pageUrl.openStream());
-		Element mainContent = (Element) doc.getElementById("main-content");
-//		NodeList nodes = 
-		System.out.println(mainContent.getElementCount() + " nodes found");
-		
-		
-	}
+	
 	
 	
 	
