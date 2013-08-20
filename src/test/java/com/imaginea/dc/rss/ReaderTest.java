@@ -1,23 +1,9 @@
 package com.imaginea.dc.rss;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Iterator;
 
-import javax.swing.text.Element;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.apache.lucene.analysis.CharReader;
-import org.apache.lucene.analysis.charfilter.HTMLStripCharFilter;
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 
 import com.imaginea.dc.entities.NewsArticle;
 import com.sun.syndication.feed.synd.SyndContent;
