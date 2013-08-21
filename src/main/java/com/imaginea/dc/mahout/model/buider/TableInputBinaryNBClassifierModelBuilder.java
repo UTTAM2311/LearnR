@@ -8,13 +8,13 @@ import java.util.UUID;
 
 import com.imaginea.dc.entities.NewsArticle;
 import com.imaginea.dc.mahout.hadoop.utils.HadoopSequenceFileGenerator;
-import com.imaginea.dc.service.NewsReaderService;
+import com.imaginea.dc.service.NewsArticleService;
 
 public class TableInputBinaryNBClassifierModelBuilder extends TsvInputClassifierModelBuilder{
 
-	protected NewsReaderService service;
+	protected NewsArticleService service;
 	
-	public TableInputBinaryNBClassifierModelBuilder(NewsReaderService service, String localInputSeqFileName, String localVectorOutputFileDir,
+	public TableInputBinaryNBClassifierModelBuilder(NewsArticleService service, String localInputSeqFileName, String localVectorOutputFileDir,
 			String localModelOutputFileDir, String luceneAnalyser) {		
 		super(null, localInputSeqFileName, localVectorOutputFileDir, localModelOutputFileDir, luceneAnalyser);
 		this.service = service;

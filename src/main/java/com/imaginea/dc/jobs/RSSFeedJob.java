@@ -4,22 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.imaginea.dc.entities.NewsArticle;
-import com.imaginea.dc.newsreaders.BBCNewsReader;
-import com.imaginea.dc.newsreaders.HinduNewsReader;
-import com.imaginea.dc.newsreaders.NyTimesNewsReader;
-import com.imaginea.dc.service.NewsReaderService;
+import com.imaginea.dc.newsproviders.BBCNewsProvider;
+import com.imaginea.dc.newsproviders.HinduNewsProvider;
+import com.imaginea.dc.newsproviders.ReutersNewsProvider;
+import com.imaginea.dc.service.NewsArticleService;
 
 public class RSSFeedJob {
 
-	private BBCNewsReader bbcNewsReader;
-	private HinduNewsReader hinduNewsReader;
-	private NyTimesNewsReader nyTimesNewsReader;
-	
-	private NewsReaderService newsReaderService;
+	private NewsArticleService newsArticleService;
 
+	private ReutersNewsProvider reutersNewsProvider;
+	private BBCNewsProvider bbcNewsProvider;
+	private HinduNewsProvider hinduNewsProvider;
+	
+	
 	/* RSS Feeds */
 
 	public List<NewsArticle> fetchNewsFromRSSFeeds() {
@@ -29,20 +28,24 @@ public class RSSFeedJob {
 		List<NewsArticle> articles = new ArrayList<NewsArticle>();
 
 		try {
-			List<NewsArticle> bbcfeeds = bbcNewsReader.processRSSfeed(null);
+			List<NewsArticle> bbcfeeds = bbcNewsProvider.processRSSfeed(null);
 			if (bbcfeeds != null)
 				articles.addAll(bbcfeeds);
 
-			List<NewsArticle> hindufeeds = hinduNewsReader.processRSSfeed(null);
+			List<NewsArticle> hindufeeds = hinduNewsProvider.processRSSfeed(null);
 			if (hindufeeds != null)
 				articles.addAll(hindufeeds);
+			
+			List<NewsArticle> reutersfeeds = reutersNewsProvider.processRSSfeed(null);
+			if (reutersfeeds != null)
+				articles.addAll(reutersfeeds);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		for (NewsArticle newsArticle : articles) {
-			newsReaderService.createNewsArticle(newsArticle);
+			newsArticleService.createNewsArticle(newsArticle);
 		}
 
 		return articles;
@@ -51,20 +54,22 @@ public class RSSFeedJob {
 	
 	/* Getters and Setters */
 
-	public void setBbcNewsReader(BBCNewsReader bbcNewsReader) {
-		this.bbcNewsReader = bbcNewsReader;
+
+	public void setNewsArticleService(NewsArticleService newsArticleService) {
+		this.newsArticleService = newsArticleService;
 	}
 
-	public void setHinduNewsReader(HinduNewsReader hinduNewsReader) {
-		this.hinduNewsReader = hinduNewsReader;
+
+	public void setReutersNewsProvider(ReutersNewsProvider reutersNewsProvider) {
+		this.reutersNewsProvider = reutersNewsProvider;
 	}
 
-	public void setNyTimesNewsReader(NyTimesNewsReader nyTimesNewsReader) {
-		this.nyTimesNewsReader = nyTimesNewsReader;
+	public void setBbcNewsProvider(BBCNewsProvider bbcNewsProvider) {
+		this.bbcNewsProvider = bbcNewsProvider;
 	}
 
-	public void setNewsReaderService(NewsReaderService newsReaderService) {
-		this.newsReaderService = newsReaderService;
+	public void setHinduNewsProvider(HinduNewsProvider hinduNewsProvider) {
+		this.hinduNewsProvider = hinduNewsProvider;
 	}
 
 }

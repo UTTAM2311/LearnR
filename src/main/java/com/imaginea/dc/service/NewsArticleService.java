@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.imaginea.dc.entities.NewsArticle;
 
-public interface NewsReaderService {
+public interface NewsArticleService {
 	
 	/* NewsArticle CRUD */
 	
@@ -20,14 +20,19 @@ public interface NewsReaderService {
 	List<NewsArticle> readNewsArticle(String title);
 	
 	
-	List<NewsArticle> fetchAllArticles();
+	/* News Articles paginated */
 	
-	List<NewsArticle> fetchArticlesBySource(String source);
+	List<NewsArticle> fetchAllArticles(Integer pageNumber, Integer pageSize);
+	
+	List<NewsArticle> fetchArticlesBySource(String source, Integer pageNumber, Integer pageSize);
 	
 	
-	List<NewsArticle> fetchAllUnlabelledArticles();
+	List<NewsArticle> fetchAllUnlabelledArticles(Integer pageNumber, Integer pageSize);
 	
+
 	List<NewsArticle> fetchArticlesForTraining();
+	
+	List<NewsArticle> fetchArticlesForTraining(Integer pageNumber, Integer pageSize);
 	
 
 }

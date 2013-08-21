@@ -8,11 +8,11 @@ import com.imaginea.dc.mahout.model.buider.MahoutClassifierModelBuilder;
 import com.imaginea.dc.mahout.model.buider.ModelBuilderException;
 import com.imaginea.dc.mahout.model.buider.TableInputBinaryNBClassifierModelBuilder;
 import com.imaginea.dc.mahout.model.buider.TsvInputClassifierModelBuilder;
-import com.imaginea.dc.service.NewsReaderService;
+import com.imaginea.dc.service.NewsArticleService;
 
 public class MahoutBinaryClassifierModelBuilder {
 
-	public static NewsReaderService service;
+	public static NewsArticleService service;
 	
 	public static void main(String[] args) {
 		Properties prop = new Properties();

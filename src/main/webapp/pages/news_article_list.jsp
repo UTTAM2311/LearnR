@@ -20,15 +20,20 @@
 		<div class="wrapper">
 			<ul>
 				<li class="pressed">
-					<a href="<%= request.getContextPath() %>/feed/list">All Articles</a>
+					<a href="<%= request.getContextPath() %>/feed/list?page=${page}&size=${size}">All Articles</a>
 				</li>
 				<li>
-					<a href="<%= request.getContextPath() %>/feed/unlabelled">Unlabelled Articles</a>
+					<a href="<%= request.getContextPath() %>/feed/unlabelled?page=${page}&size=${size}">Unlabelled Articles</a>
 				</li>
 				<li>
-					<a href="<%= request.getContextPath() %>/feed/labelled">Labelled Articles</a>
+					<a href="<%= request.getContextPath() %>/feed/labelled?page=${page}&size=${size}">Labelled Articles</a>
 				</li>
 			</ul>
+		</div>
+		<div class="wrapper">
+			<label>Unlabelled : </label> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<a href="<%= request.getContextPath() %>/feed/unlabelled?page=${page - 1}&size=${size}"> PrevPage </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			<a href="<%= request.getContextPath() %>/feed/unlabelled?page=${page + 1}&size=${size}"> NextPage </a>
 		</div>
 	</div>
 

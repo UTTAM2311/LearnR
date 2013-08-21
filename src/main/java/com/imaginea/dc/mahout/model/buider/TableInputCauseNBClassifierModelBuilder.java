@@ -8,11 +8,11 @@ import java.util.UUID;
 
 import com.imaginea.dc.entities.NewsArticle;
 import com.imaginea.dc.mahout.hadoop.utils.HadoopSequenceFileGenerator;
-import com.imaginea.dc.service.NewsReaderService;
+import com.imaginea.dc.service.NewsArticleService;
 
 public class TableInputCauseNBClassifierModelBuilder extends TableInputBinaryNBClassifierModelBuilder{
 
-	public TableInputCauseNBClassifierModelBuilder(NewsReaderService service, String localInputSeqFileName,
+	public TableInputCauseNBClassifierModelBuilder(NewsArticleService service, String localInputSeqFileName,
 			String localVectorOutputFileDir, String localModelOutputFileDir, String luceneAnalyser) {
 		super(service, localInputSeqFileName, localVectorOutputFileDir, localModelOutputFileDir, luceneAnalyser);
 	}

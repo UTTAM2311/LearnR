@@ -3,14 +3,18 @@ package com.imaginea.dc.service.impl;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imaginea.dc.api.IDao;
 import com.imaginea.dc.entities.NewsArticle;
-import com.imaginea.dc.service.NewsReaderService;
+import com.imaginea.dc.service.NewsArticleService;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-public class NewsReaderServiceImpl implements NewsReaderService {
+public class NewsArticleServiceImpl implements NewsArticleService {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(NewsArticleServiceImpl.class);
 	
 	private IDao genericDao;
 	
@@ -27,8 +31,9 @@ public class NewsReaderServiceImpl implements NewsReaderService {
 				try {
 				genericDao.save(article);
 				} catch(Exception e) {
+					LOGGER.error(e.getMessage());
 					if(e instanceof MySQLIntegrityConstraintViolationException) {
-						System.out.println(e.getMessage());
+						LOGGER.error("Error while saving : Duplicate entry fo the title ");
 					}
 				}
 			} else {
@@ -72,25 +77,33 @@ public class NewsReaderServiceImpl implements NewsReaderService {
 	}
 	
 	
-	public List<NewsArticle> fetchAllArticles() {
-		return genericDao.findAllEntities(NewsArticle.class);
+	
+	
+	public List<NewsArticle> fetchAllArticles(Integer pageNumber, Integer pageSize) {
+		return genericDao.findAllEntities(NewsArticle.class, null, pageNumber, pageSize);
 	}
 	
-	public List<NewsArticle> fetchArticlesBySource(String source){
+	public List<NewsArticle> fetchArticlesBySource(String source, Integer pageNumber, Integer pageSize){
 		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
 		criteria.put("source", source);
-		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchBySource", criteria);
+		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchBySource", criteria, pageNumber, pageSize);
 	}
 
 	
-	public List<NewsArticle> fetchAllUnlabelledArticles() {
+	public List<NewsArticle> fetchAllUnlabelledArticles(Integer pageNumber, Integer pageSize) {
 		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
-		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchAllUnblabelled", criteria);
+		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchAllUnblabelled", criteria, pageNumber, pageSize);
 	}
+	
 	
 	public List<NewsArticle> fetchArticlesForTraining() {
 		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
 		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchLabelled", criteria);
+	}
+	
+	public List<NewsArticle> fetchArticlesForTraining(Integer pageNumber, Integer pageSize) {
+		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
+		return genericDao.getEntities(NewsArticle.class, "newsArticle.fetchLabelled", criteria, pageNumber, pageSize);
 	}
 	
 	

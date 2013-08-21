@@ -20,7 +20,7 @@ import com.imaginea.dc.jobs.RSSFeedJob;
 public class NewsReaderServiceTest {
 	
 	@Autowired
-	private NewsReaderService _readerService;
+	private NewsArticleService _readerService;
 	
 	@Autowired
 	private RSSFeedJob rssFeed;

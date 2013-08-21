@@ -122,32 +122,33 @@
 	<!-- Controller -->
 	
 	<bean id="newsArticleController" class="com.imaginea.dc.controllers.NewsArticleController" scope="prototype">
-		<property name="newsReaderService" ref="newsReaderService" />
+		<property name="newsArticleService" ref="newsArticleService" />
 	</bean>
 	
 
 	<!-- Services -->
 
-	<bean id="newsReaderService" class="com.imaginea.dc.service.impl.NewsReaderServiceImpl"> 
+	<bean id="newsArticleService" class="com.imaginea.dc.service.impl.NewsArticleServiceImpl"> 
 		<property name="genericDao" ref="genericDao" />
 	</bean>
 
 
 	<!-- NewsReader -->
 	
-	<bean id="bbcNewsReader" class="com.imaginea.dc.newsreaders.BBCNewsReader" />
+	<bean id="bbcNewsProvider" class="com.imaginea.dc.newsproviders.BBCNewsProvider" />
 	
-	<bean id="hinduNewsReader" class="com.imaginea.dc.newsreaders.HinduNewsReader" />
+	<bean id="hinduNewsProvider" class="com.imaginea.dc.newsproviders.HinduNewsProvider" />
 	
-	<bean id="nyTimesNewsReader" class="com.imaginea.dc.newsreaders.NyTimesNewsReader" />
+	<bean id="reutersNewsProvider" class="com.imaginea.dc.newsproviders.ReutersNewsProvider" >
+		<property name="htmlLinkExtractor" ref="htmlLinkExtractor" />
+	</bean>
 	
 
 
 	<!-- Utils -->
 	
-	<bean id="excelUtil" class="com.imaginea.dc.utils.ExcelUtil" />
-
 	<bean id="textProcessingUtil" class="com.imaginea.dc.utils.TextProcessingUtil" />
+	
 	
 	<!-- Preprocessing Data -->	
 	
@@ -157,23 +158,29 @@
 	
 	<bean id="svmProcessor" class="com.imaginea.dc.svm.SVMProcessor" />
 	 	
-	<bean id="SVMModel" class="libsvm.model.SVMEngine" />	
+	<bean id="SVMEngine" class="libsvm.model.SVMEngine" />
+	
+	<bean id="SVMModel" class="libsvm.svm.model.SVMModel" />
+	
+	<bean id="htmlLinkExtractor" class="com.imaginea.dc.utils.HTMLLinkExtractor" />
 	 
+	
 	<!-- CronJobs -->
 	
 	<task:annotation-driven />
 	
 	<bean id="rssFeedJob" class="com.imaginea.dc.jobs.RSSFeedJob" >
-		<property name="bbcNewsReader" ref="bbcNewsReader" />
-		<property name="hinduNewsReader" ref="hinduNewsReader" />
-		<property name="nyTimesNewsReader" ref="nyTimesNewsReader" />
-		<property name="newsReaderService" ref="newsReaderService" />
+		<property name="newsArticleService" ref="newsArticleService" />
+		
+		<property name="bbcNewsProvider" ref="bbcNewsProvider" />
+		<property name="hinduNewsProvider" ref="hinduNewsProvider" />
+		<property name="reutersNewsProvider" ref="reutersNewsProvider" />
 	</bean>
 	
 	<task:scheduled-tasks>
         <task:scheduled ref="rssFeedJob" method="fetchNewsFromRSSFeeds" cron="${rss.cron.expression}"></task:scheduled>
     </task:scheduled-tasks>
-
+	
 	
 </beans>
 

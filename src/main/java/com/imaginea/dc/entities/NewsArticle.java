@@ -148,7 +148,7 @@ public class NewsArticle extends BaseEntity {
 		this.author = author;
 	}
 
-	@Column(name = "url")
+	@Column(name = "url", nullable = false)
 	public String getUrl() {
 		return url;
 	}
