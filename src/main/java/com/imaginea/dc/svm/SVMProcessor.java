@@ -54,7 +54,9 @@ public class SVMProcessor {
 	
 	
 	SVMParams params = new SVMParams();
-	params.kernel_type = 3;
+	//params.kernel_type = SVMParams.RBF;
+	params.C = 8.0;
+	params.gamma = 0.001953125;
 	
 	model = engine.svm_train(problem, params);
 	
@@ -62,18 +64,34 @@ public class SVMProcessor {
 	
 	
 	//FeatureNode[] testarray = new FeatureNode[nodes.size() - trainCount];
-	int accuracy = 100;
+	double accuracy = 100;
 	int testCount = (nodes.size()-trainCount);
+	double[] yTestPredicted = new double[testCount];
+	double[] yTestActual = new double[testCount];
+	int tempCounter = 0;
+	int totalPositiveActual = 0;
+	int totalPositivePredicted = 0;
 	for (int i=trainCount;i<nodes.size();i++){
 		ArrayList<FeatureNode> row = (ArrayList<FeatureNode>) nodes.get(i);
 		double yTest = engine.svm_predict(model, row.toArray(new FeatureNode[row.size()]));
 		System.out.println("===============================>>>>> Actual Value :"+y[i]+"======================= Predicted Value :"+yTest);
+		yTestPredicted[tempCounter] = yTest;
+		yTestActual[tempCounter] = y[i];
+		if (y[i] != 1.0){
+			totalPositiveActual ++;
+		}
+		
+		if (yTest != 1.0){
+			totalPositivePredicted ++;
+		}
 		if (y[i] != yTest)
 		{
-			accuracy = accuracy - (100 / testCount);			
+			accuracy = accuracy - ((double)100.0 / testCount);			
 		}
 	    
 	}
+	System.out.println("Result ==========================================>>>>>>> for :"+testCount);
+	System.out.println("Total Actual Positive values :"+ totalPositiveActual +" ===== Total Predicted Positive :"+totalPositivePredicted);
 	System.out.println("Accurracy :"+accuracy +" %");
 	}	
 	

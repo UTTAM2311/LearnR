@@ -15,16 +15,20 @@ import com.imaginea.dc.entities.NewsArticle;
 import com.imaginea.dc.entities.SVMInput;
 import com.imaginea.dc.entities.WordCount;
 import com.imaginea.dc.service.DataPreProcessingService;
+import com.imaginea.dc.service.NewsArticleService;
 
 public class DataPreProcessingServiceImpl implements DataPreProcessingService {
 
 	@Autowired
 	private IDao dao;
+		
+	@Autowired
+	private NewsArticleService newsArticleService;
 	
 	public List<NewsArticle> fetchDataFromDB() {
 		// TODO Auto-generated method stub
-		
-		return dao.findAllEntities(NewsArticle.class);		
+		return newsArticleService.fetchArticlesForTraining();
+		//return dao.findAllEntities(NewsArticle.class);		
 	}
 
 	@Transactional
