@@ -21,7 +21,7 @@ import org.apache.mahout.vectorizer.TFIDF;
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
 
-public class MahoutNBClassifier extends AnstractMahoutClassifier {
+public class MahoutNBClassifier extends AbstractMahoutClassifier {
 	protected String modelPath ;
 	protected String labelIndexPath;
 	protected String dictionaryPath ;
