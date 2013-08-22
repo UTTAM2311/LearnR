@@ -10,8 +10,11 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.util.ToolRunner;
 import org.apache.mahout.classifier.naivebayes.training.TrainNaiveBayesJob;
 import org.apache.mahout.vectorizer.SparseVectorsFromSequenceFiles;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.imaginea.dc.mahout.utils.HadoopSequenceFileGenerator;
+import com.imaginea.dc.service.impl.NewsArticleServiceImpl;
 
 public class TsvInputClassifierModelBuilder extends AbstactMahoutClassifierModelBuilder {
 
@@ -24,6 +27,8 @@ public class TsvInputClassifierModelBuilder extends AbstactMahoutClassifierModel
 	protected String localModelOutputFileDir;
 	
 	protected String luceneAnalyser;
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(NewsArticleServiceImpl.class);
 	
 	public TsvInputClassifierModelBuilder(String inputTsvFile,
 			String localInputSeqFileName, String localVectorOutputFileDir, String localModelOutputFileDir, String luceneAnalyser) {
@@ -57,7 +62,7 @@ public class TsvInputClassifierModelBuilder extends AbstactMahoutClassifierModel
 			}
 			reader.close();
 			sequenceFileGenerator.finalise();
-			System.out.println("Completed writing " + count + " lines.");
+			LOGGER.info("Completed writing " + count + " lines.");
 		} catch (FileNotFoundException e) {
 			throw new ModelBuilderException("Could not find input file", e);
 		} catch (IOException e) {

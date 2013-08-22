@@ -17,11 +17,17 @@ import org.apache.mahout.math.RandomAccessSparseVector;
 import org.apache.mahout.math.Vector;
 import org.apache.mahout.math.Vector.Element;
 import org.apache.mahout.vectorizer.TFIDF;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ConcurrentHashMultiset;
 import com.google.common.collect.Multiset;
+import com.imaginea.dc.service.impl.NewsArticleServiceImpl;
 
 public class MahoutNBClassifier extends AbstractMahoutClassifier {
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(NewsArticleServiceImpl.class);
+	
 	protected String modelPath ;
 	protected String labelIndexPath;
 	protected String dictionaryPath ;
@@ -57,10 +63,10 @@ public class MahoutNBClassifier extends AbstractMahoutClassifier {
 			dictionary = readDictionnary(configuration, new Path(dictionaryPath));
 			documentFrequency = readDocumentFrequency(configuration, new Path(documentFrequencyPath));	
 			analyzer = AnalyzerUtils.createAnalyzer(luceneAnalyser);
-		} catch (IOException e) {			
-			e.printStackTrace();
+		} catch (IOException e) {	
+			LOGGER.error("Exception while configuring the mahout model", e);
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			LOGGER.error("Exception while configuring the mahout model", e);
 		}
 		
 		labelCount = labels.size();

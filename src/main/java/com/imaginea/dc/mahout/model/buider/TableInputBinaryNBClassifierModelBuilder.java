@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imaginea.dc.entities.NewsArticle;
 import com.imaginea.dc.mahout.utils.HadoopSequenceFileGenerator;
 import com.imaginea.dc.service.NewsArticleService;
+import com.imaginea.dc.service.impl.NewsArticleServiceImpl;
 
 public class TableInputBinaryNBClassifierModelBuilder extends TsvInputClassifierModelBuilder{
 
+	private final Logger LOGGER = LoggerFactory.getLogger(NewsArticleServiceImpl.class);
+	
 	protected NewsArticleService service;
 	
 	public TableInputBinaryNBClassifierModelBuilder(NewsArticleService service, String localInputSeqFileName, String localVectorOutputFileDir,
@@ -38,7 +44,7 @@ public class TableInputBinaryNBClassifierModelBuilder extends TsvInputClassifier
 				sequenceFileGenerator.addData("/" + catogery + "/" + UUID.randomUUID(), atricle.getContent());
 			}
 			sequenceFileGenerator.finalise();
-			System.out.println("Completed writing " + attricles.size()+ " atricles.");
+			LOGGER.info("Completed writing " + attricles.size()+ " atricles.");
 		} catch (FileNotFoundException e) {
 			throw new ModelBuilderException("Could not find input file", e);
 		} catch (IOException e) {

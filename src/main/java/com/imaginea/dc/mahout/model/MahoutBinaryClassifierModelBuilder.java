@@ -4,17 +4,22 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.imaginea.dc.mahout.model.buider.MahoutClassifierModelBuilder;
 import com.imaginea.dc.mahout.model.buider.ModelBuilderException;
 import com.imaginea.dc.mahout.model.buider.TableInputBinaryNBClassifierModelBuilder;
-import com.imaginea.dc.mahout.model.buider.TsvInputClassifierModelBuilder;
 import com.imaginea.dc.service.NewsArticleService;
+import com.imaginea.dc.service.impl.NewsArticleServiceImpl;
 
 public class MahoutBinaryClassifierModelBuilder {
-
-	public static NewsArticleService service;
 	
-	public static void main(String[] args) {
+	private static final Logger LOGGER = LoggerFactory.getLogger(NewsArticleServiceImpl.class);
+
+	private NewsArticleService newsArticleService;
+	
+	public void buildInputBinaryClassifierModel() {
 		Properties prop = new Properties();
 
 		try {
@@ -36,16 +41,24 @@ public class MahoutBinaryClassifierModelBuilder {
 			
 			String luceneAnalyser = prop.getProperty("model1.lucene.analyser");
 			
-			MahoutClassifierModelBuilder template = new TableInputBinaryNBClassifierModelBuilder(service, 
+			MahoutClassifierModelBuilder template = new TableInputBinaryNBClassifierModelBuilder(newsArticleService, 
 					localInputSeqFileName, localVectorOutputFileDir, localModelOutputFileDir, luceneAnalyser);
 			
 			template.buildModel();
 
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			LOGGER.error("Error building the model", ex);
 		} catch (ModelBuilderException e) {
-			e.printStackTrace();
+			LOGGER.error("Error building the model", e);
 		}
 
+	}
+
+	public NewsArticleService getNewsArticleService() {
+		return newsArticleService;
+	}
+
+	public void setNewsArticleService(NewsArticleService newsArticleService) {
+		this.newsArticleService = newsArticleService;
 	}
 }
