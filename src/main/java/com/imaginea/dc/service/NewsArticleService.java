@@ -3,6 +3,7 @@ package com.imaginea.dc.service;
 import java.util.List;
 
 import com.imaginea.dc.entities.NewsArticle;
+import com.imaginea.dc.entities.SubNewsArticle;
 
 public interface NewsArticleService {
 	
@@ -16,6 +17,11 @@ public interface NewsArticleService {
 	
 	void deleteNewsArticle(Integer pkey);
 	
+	
+	void createSubNewsArticle(SubNewsArticle subArticle);
+	
+	
+	NewsArticle readNewsArticleByUniqueValue(String uniqueValue);
 	
 	List<NewsArticle> readNewsArticle(String title);
 	

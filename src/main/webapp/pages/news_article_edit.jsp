@@ -41,7 +41,11 @@
 			<div class="mc-rounded">
 				<div>
 					<a href="<%= request.getContextPath() %>/feed/edit?pkey=${newsArticle.pkey - 1}"> PrevArticle </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-					<a href="<%= request.getContextPath() %>/feed/edit?pkey=${newsArticle.pkey + 1}"> NextArticle </a>
+					<a href="<%= request.getContextPath() %>/feed/edit?pkey=${newsArticle.pkey + 1}"> NextArticle </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					
+					<c:if test="${newsArticle.isPositive == null}">
+						<label>NOT YET LABELED</label>
+					</c:if>
 				</div>
 				
 				<!-- Application Form -->
@@ -62,17 +66,29 @@
 							</li>
 							<li>
 								<h4>Content :</h4>
-								<textarea rows="15" cols="130" name="content"> ${newsArticle.content}</textarea>
+								<textarea rows="12" cols="130" name="content"> ${newsArticle.content}</textarea>
 							</li>
 							
 							<li>
+								
+								<c:if test="${newsArticle.isPositive != null}">
+									<c:choose>
+										<c:when test="${newsArticle.isPositive}">
+											<c:set var="isPositive" value="true" />
+										</c:when>
+										<c:otherwise>
+											<c:set var="isNegative" value="true" />
+										</c:otherwise>									
+									</c:choose>
+								</c:if>
+							
 								<div>
 									<label class="name" for="isPos-true"> +Ve Example </label>
-									<input type="radio" id="isPos-true" name="isPositive" value="true">
+									<input type="radio" id="isPos-true" name="isPositive" value="true" <c:if test="${isPositive}">CHECKED</c:if> >
 								</div>
 								<div>
 									<label class="name" for="isPos-false"> -Ve Example </label>
-									<input type="radio" id="isPos-false" name="isPositive" value="false">
+									<input type="radio" id="isPos-false" name="isPositive" value="false" <c:if test="${isNegative}">CHECKED</c:if>>
 								</div>
 								
 								<!-- value="${newsArticle.isPositive}" -->

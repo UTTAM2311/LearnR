@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.imaginea.dc.api.IDao;
+import com.imaginea.dc.entities.BaseNewsArticle;
 import com.imaginea.dc.entities.NewsArticle;
+import com.imaginea.dc.entities.SubNewsArticle;
 import com.imaginea.dc.service.NewsArticleService;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
@@ -24,27 +26,23 @@ public class NewsArticleServiceImpl implements NewsArticleService {
 	@Transactional
 	public void createNewsArticle(NewsArticle article) {
 		if(article != null && article.getTitle() != null) {
-			// Look for existing articles  
-			List<NewsArticle> tempArticles = this.readNewsArticle(article.getTitle());
-			if(tempArticles == null || tempArticles.size() == 0) {
-				// Save on new
-				try {
+			try {
 				genericDao.save(article);
-				} catch(Exception e) {
-					LOGGER.error(e.getMessage());
-					if(e instanceof MySQLIntegrityConstraintViolationException) {
-						LOGGER.error("Error while saving : Duplicate entry fo the title ");
+			} catch(Exception e) {
+				
+				LOGGER.error(e.getMessage());
+				if(e instanceof MySQLIntegrityConstraintViolationException) {
+					LOGGER.error("Error while saving : Duplicate entry fo the title ");
+					
+					NewsArticle parent = this.readNewsArticleByUniqueValue(article.getUniqueValue());
+					if(parent != null) {
+						SubNewsArticle subArticle = new SubNewsArticle(article);
+						subArticle.setNewsArticle(parent);
+						
+						genericDao.save(subArticle);
 					}
 				}
-			} else {
-				// TODO : Check for update
-				if(article.getUpdatedDate() != null) {
-					final NewsArticle tempArticle = tempArticles.get(0);
-					article.setPkey(tempArticle.getPkey());
-					article.setVersion(tempArticle.getVersion());
-					
-					genericDao.update(article);
-				}
+				
 			}
 		}
 	}
@@ -69,6 +67,21 @@ public class NewsArticleServiceImpl implements NewsArticleService {
 		}
 	}
 	
+	
+	@Transactional
+	public void createSubNewsArticle(SubNewsArticle subArticle) {
+		if(subArticle != null && subArticle.getNewsArticle() != null) {
+			genericDao.save(subArticle);
+		}
+	}
+	
+	
+	
+	public NewsArticle readNewsArticleByUniqueValue(String uniqueValue) {
+		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
+		criteria.put("uniqueValue", uniqueValue);
+		return genericDao.getEntity(NewsArticle.class, "newsArticle.fetchByUniqueValue", criteria);
+	}
 	
 	public List<NewsArticle> readNewsArticle(String title) {
 		Hashtable<String, Object> criteria = new Hashtable<String, Object>();
