@@ -125,7 +125,9 @@
 	</bean>
 	
 	<bean id="mahoutController" class="com.imaginea.dc.controllers.MahoutController" scope="prototype">
-		<property name="newsArticleService" ref="newsArticleService" />
+		<property name="newsArticleService" ref="newsArticleService" />		
+		<property name="mahoutBinaryClassifierModelBuilder" ref="mahoutBinaryClassifierModelBuilder" />	
+		<property name="mahoutCauseClassifierModelBuilder" ref="mahoutCauseClassifierModelBuilder" />
 	</bean>
 	
 
@@ -170,6 +172,17 @@
 	<bean id="SVMModel" class="libsvm.svm.model.SVMModel" />
 	
 	<bean id="htmlLinkExtractor" class="com.imaginea.dc.utils.HTMLLinkExtractor" />
+	
+	<!-- Mahout Classifiers -->
+	
+	<bean id="mahoutBinaryClassifierModelBuilder" class="com.imaginea.dc.mahout.model.MahoutBinaryClassifierModelBuilder">
+		<property name="newsArticleService" ref="newsArticleService" />
+	</bean>
+	
+	<bean id="mahoutCauseClassifierModelBuilder" class="com.imaginea.dc.mahout.model.MahoutCauseClassifierModelBuilder">
+		<property name="newsArticleService" ref="newsArticleService" />
+	</bean>
+	
 	 
 	
 	<!-- CronJobs -->

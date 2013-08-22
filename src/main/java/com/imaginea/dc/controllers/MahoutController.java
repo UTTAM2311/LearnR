@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.imaginea.dc.mahout.model.MahoutBinaryClassifierModelBuilder;
+import com.imaginea.dc.mahout.model.MahoutCauseClassifierModelBuilder;
 import com.imaginea.dc.service.NewsArticleService;
 
 @Controller
@@ -16,6 +18,9 @@ public class MahoutController {
 	
 	private NewsArticleService newsArticleService;
 
+	private MahoutBinaryClassifierModelBuilder mahoutBinaryClassifierModelBuilder;
+	
+	private MahoutCauseClassifierModelBuilder mahoutCauseClassifierModelBuilder;
 	
 	@RequestMapping(value = "/ping")
 	public String prepareArticlesList(Model model) {
@@ -24,13 +29,21 @@ public class MahoutController {
 		return "mahout_ping";
 	}
 	
-	
-	
 
 	/* Getters and Setters */
 	
 	public void setNewsArticleService(NewsArticleService newsArticleService) {
 		this.newsArticleService = newsArticleService;
+	}
+
+
+	public void setMahoutBinaryClassifierModelBuilder(MahoutBinaryClassifierModelBuilder mahoutBinaryClassifierModelBuilder) {
+		this.mahoutBinaryClassifierModelBuilder = mahoutBinaryClassifierModelBuilder;
+	}
+
+
+	public void setMahoutCauseClassifierModelBuilder(MahoutCauseClassifierModelBuilder mahoutCauseClassifierModelBuilder) {
+		this.mahoutCauseClassifierModelBuilder = mahoutCauseClassifierModelBuilder;
 	}
 	
 }
