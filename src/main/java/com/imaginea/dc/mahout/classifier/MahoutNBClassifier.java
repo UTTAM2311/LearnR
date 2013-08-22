@@ -71,7 +71,7 @@ public class MahoutNBClassifier extends AbstractMahoutClassifier {
 		
 		labelCount = labels.size();
 		//TODO: Fix this hard coding
-		trainingDocumentCount =1000;
+		trainingDocumentCount =2016;
 	}
 
 	public String classify(String text) throws IOException {

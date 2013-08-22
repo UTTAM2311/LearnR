@@ -51,7 +51,7 @@ public class TsvInputClassifierModelBuilder extends AbstactMahoutClassifierModel
 				}
 				String[] tokens = line.split("\t", 2);
 				if (tokens.length != 2) {
-					System.out.println("Skipping line: " + line);
+					LOGGER.info("Skipping line: " + line);
 					continue;
 				}
 				String category = tokens[0];
@@ -74,7 +74,7 @@ public class TsvInputClassifierModelBuilder extends AbstactMahoutClassifierModel
 
 	public void generateSequenceToSparseFile() throws ModelBuilderException {
 		 try {
-			String[] args = new String[]{"-i",localInputSeqFileName, "-o", localVectorOutputFileDir, "-a", luceneAnalyser };
+			String[] args = new String[]{"-i",localInputSeqFileName, "-o", localVectorOutputFileDir, "-a", luceneAnalyser , "-nr" ,"5", "-chunk", "1"};
 			ToolRunner.run(new SparseVectorsFromSequenceFiles(), args);
 		} catch (Exception e) {
 			throw new ModelBuilderException("Error converting sequence to sparse vector", e);

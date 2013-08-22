@@ -36,15 +36,22 @@ public class TableInputBinaryNBClassifierModelBuilder extends TsvInputClassifier
 			if(attricles==null) {
 				attricles = new ArrayList<NewsArticle>();
 			}
+			int count = 0;
+			int totalcount  = 0;
 			for(NewsArticle atricle : attricles) {
-				String catogery = "false";
+				String catogery = "negative";
 				if(atricle.getIsPositive() != null && atricle.getIsPositive()) {
-					 catogery = "true";
+					 catogery = "positive";
+				} else {
+					count++;
+					if(count > 500)
+						continue;
 				}
+				totalcount++;
 				sequenceFileGenerator.addData("/" + catogery + "/" + UUID.randomUUID(), atricle.getContent());
 			}
 			sequenceFileGenerator.finalise();
-			LOGGER.info("Completed writing " + attricles.size()+ " atricles.");
+			LOGGER.info("Completed writing " + totalcount+ " atricles.");
 		} catch (FileNotFoundException e) {
 			throw new ModelBuilderException("Could not find input file", e);
 		} catch (IOException e) {
