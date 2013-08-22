@@ -1,4 +1,4 @@
-package com.imaginea.dc.mahout.hadoop.utils;
+package com.imaginea.dc.mahout.utils;
 
 import java.io.IOException;
 import java.util.UUID;

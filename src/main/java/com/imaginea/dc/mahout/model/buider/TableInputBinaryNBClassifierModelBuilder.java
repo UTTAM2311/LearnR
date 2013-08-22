@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.imaginea.dc.entities.NewsArticle;
-import com.imaginea.dc.mahout.hadoop.utils.HadoopSequenceFileGenerator;
+import com.imaginea.dc.mahout.utils.HadoopSequenceFileGenerator;
 import com.imaginea.dc.service.NewsArticleService;
 
 public class TableInputBinaryNBClassifierModelBuilder extends TsvInputClassifierModelBuilder{

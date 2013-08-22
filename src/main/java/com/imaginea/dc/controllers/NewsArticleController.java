@@ -2,6 +2,8 @@ package com.imaginea.dc.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,8 @@ import com.imaginea.dc.utils.Constants;
 @Controller
 @RequestMapping("/feed")
 public class NewsArticleController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(NewsArticleController.class);
 
 	private NewsArticleService newsArticleService;
 	

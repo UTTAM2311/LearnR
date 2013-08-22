@@ -11,7 +11,7 @@ import org.apache.hadoop.util.ToolRunner;
 import org.apache.mahout.classifier.naivebayes.training.TrainNaiveBayesJob;
 import org.apache.mahout.vectorizer.SparseVectorsFromSequenceFiles;
 
-import com.imaginea.dc.mahout.hadoop.utils.HadoopSequenceFileGenerator;
+import com.imaginea.dc.mahout.utils.HadoopSequenceFileGenerator;
 
 public class TsvInputClassifierModelBuilder extends AbstactMahoutClassifierModelBuilder {
 
