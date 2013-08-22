@@ -11,7 +11,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.mahout.common.Pair;
 import org.apache.mahout.common.iterator.sequencefile.SequenceFileIterable;
 
-public class AnstractMahoutClassifier implements MahoutClassifier{
+public class AbstractMahoutClassifier implements MahoutClassifier{
 
 	public Map<String, Integer> readDictionnary(Configuration conf, Path dictionnaryPath) {
 		Map<String, Integer> dictionnary = new HashMap<String, Integer>();
