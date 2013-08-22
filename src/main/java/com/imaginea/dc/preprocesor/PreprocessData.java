@@ -21,8 +21,8 @@ public class PreprocessData {
 		List<NewsArticle>newsArticle = dataPreprocessingService.fetchDataFromDB();
 		
 		// Properties which will not be used anyhow. Data read from DB.
-		String workSpacePath = "C:\\Users\\prasannav\\git\\DeathCluster\\data";
-		String mergedFileName = "testdatainput.txt";
+		//String workSpacePath = "C:\\Users\\prasannav\\git\\DeathCluster\\data";
+		//String mergedFileName = "testdatainput.txt";
 		String dataDirName = "output";
 		String ext = "txt";
 		
@@ -31,8 +31,8 @@ public class PreprocessData {
 		boolean verbose = true; 
 		
 		Options options = new Options();
-		options.workSpacePath = workSpacePath;
-		options.mergedFileName = mergedFileName;
+		//options.workSpacePath = workSpacePath;
+		//options.mergedFileName = mergedFileName;
 		options.dataDirName = dataDirName;
 		options.ext = ext;
 		options.hasLabel = hasLabel;
@@ -43,7 +43,7 @@ public class PreprocessData {
 		textProcessor.setNewsArticleList(newsArticle);
 		textProcessor.process();
 
-		textProcessor.SaveResults();
+		//textProcessor.SaveResults();
 		
 		dataPreprocessingService.saveWordList(textProcessor.wordList);
 		dataPreprocessingService.saveWordCount(textProcessor.wordCnt);
@@ -52,8 +52,8 @@ public class PreprocessData {
 	}
 	
 	public ArrayList<String> convertStringToSVMInput(ArrayList<String> inputData){
-		String workSpacePath = "C:\\Users\\prasannav\\git\\DeathCluster\\data";
-		String mergedFileName = "testdatainput.txt";
+		//String workSpacePath = "C:\\Users\\prasannav\\git\\DeathCluster\\data";
+		//String mergedFileName = "testdatainput.txt";
 		String dataDirName = "output";
 		String ext = "txt";
 		
@@ -62,8 +62,8 @@ public class PreprocessData {
 		boolean verbose = true; 
 		
 		Options options = new Options();
-		options.workSpacePath = workSpacePath;
-		options.mergedFileName = mergedFileName;
+		//options.workSpacePath = workSpacePath;
+		//options.mergedFileName = mergedFileName;
 		options.dataDirName = dataDirName;
 		options.ext = ext;
 		options.hasLabel = hasLabel;

@@ -71,12 +71,29 @@ public class SVMProcessor {
 	int tempCounter = 0;
 	int totalPositiveActual = 0;
 	int totalPositivePredicted = 0;
+	int falsePositive = 0;
+	int trueNegative = 0;
+	int correctResult = 0;
+	
 	for (int i=trainCount;i<nodes.size();i++){
 		ArrayList<FeatureNode> row = (ArrayList<FeatureNode>) nodes.get(i);
 		double yTest = engine.svm_predict(model, row.toArray(new FeatureNode[row.size()]));
 		System.out.println("===============================>>>>> Actual Value :"+y[i]+"======================= Predicted Value :"+yTest);
 		yTestPredicted[tempCounter] = yTest;
 		yTestActual[tempCounter] = y[i];
+		
+		if (y[i] == 2.0 && yTest != 2.0){
+			trueNegative ++;
+		}
+		
+		if (y[i] != 2.0 && yTest == 2.0){
+			falsePositive ++;
+		}
+		
+		if (y[i] == 2.0 && yTest == 2.0){
+			correctResult ++;
+		}
+		
 		if (y[i] != 1.0){
 			totalPositiveActual ++;
 		}
@@ -91,6 +108,7 @@ public class SVMProcessor {
 	    
 	}
 	System.out.println("Result ==========================================>>>>>>> for :"+testCount);
+	System.out.println("Accurately Predicted count :"+correctResult+"============ True Negative :"+ trueNegative+" ===== False Positive :"+falsePositive);
 	System.out.println("Total Actual Positive values :"+ totalPositiveActual +" ===== Total Predicted Positive :"+totalPositivePredicted);
 	System.out.println("Accurracy :"+accuracy +" %");
 	}	

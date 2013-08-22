@@ -24,6 +24,10 @@ public class TextProcessorDC extends TextProcessor {
 		super(options);
 	}
 	
+	public void buildDocStringArray(){
+		buildDocStringArrayFromMergedFile();
+	}
+	
 	public void buildDocStringArrayFromMergedFile(){
 		
 		
