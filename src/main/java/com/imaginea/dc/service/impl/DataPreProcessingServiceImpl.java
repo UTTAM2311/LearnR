@@ -25,7 +25,7 @@ public class DataPreProcessingServiceImpl implements DataPreProcessingService {
 	@Autowired
 	private NewsArticleService newsArticleService;
 	
-	public List<NewsArticle> fetchDataFromDB() {
+	public List<NewsArticle> fetchTrainingDataFromDB() {
 		// TODO Auto-generated method stub
 		return newsArticleService.fetchArticlesForTraining();
 		//return dao.findAllEntities(NewsArticle.class);		

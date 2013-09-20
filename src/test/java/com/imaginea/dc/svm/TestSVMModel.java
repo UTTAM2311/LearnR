@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.imaginea.dc.preprocesor.PreprocessData;
+import com.imaginea.dc.svmutils.SVMProcessor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:appContext.xml"})

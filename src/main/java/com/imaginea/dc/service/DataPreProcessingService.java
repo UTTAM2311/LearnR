@@ -8,7 +8,7 @@ import com.imaginea.dc.entities.NewsArticle;
 
 public interface DataPreProcessingService {
 
-	List<NewsArticle> fetchDataFromDB() ;
+	List<NewsArticle> fetchTrainingDataFromDB() ;
 	void saveWordCount(HashMap<String, Integer> wordCount);
 	void saveSVMInputData(ArrayList<String> data);
 	void saveWordList(ArrayList<String> wordList);

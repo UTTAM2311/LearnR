@@ -2,9 +2,11 @@ package com.imaginea.dc.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,8 @@ public class SVMInput extends BaseEntity {
 	private String inputLine;
 	
 	private String outputValue;
+	
+	private NewsArticle newsArticle;
 
 	@Lob
 	public String getInputLine() {
@@ -39,6 +43,16 @@ public class SVMInput extends BaseEntity {
 
 	public void setOutputValue(String outputValue) {
 		this.outputValue = outputValue;
+	}
+
+	@OneToOne
+	@JoinColumn(name="newsarticle_pkey")
+	public NewsArticle getNewsArticle() {
+		return newsArticle;
+	}
+
+	public void setNewsArticle(NewsArticle newsArticle) {
+		this.newsArticle = newsArticle;
 	}
 
 }

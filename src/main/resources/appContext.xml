@@ -165,7 +165,7 @@
 	
 	<bean id="preprocessData" class="com.imaginea.dc.preprocesor.PreprocessData" />	
 	
-	<bean id="svmProcessor" class="com.imaginea.dc.svm.SVMProcessor" />
+	<bean id="svmProcessor" class="com.imaginea.dc.svmutils.SVMProcessor" />
 	 	
 	<bean id="SVMEngine" class="libsvm.model.SVMEngine" />
 	
@@ -201,7 +201,9 @@
         <task:scheduled ref="rssFeedJob" method="fetchNewsFromRSSFeeds" cron="${rss.cron.expression}"></task:scheduled>
     </task:scheduled-tasks>
 	
-	
+	<bean id="modelBuildService" class="com.imaginea.dc.service.impl.ModelBuildServiceImpl"></bean>
+	<bean id="predictService" class="com.imaginea.dc.service.impl.PredictServiceImpl"></bean>
+	<bean id="dataPreprocessor" class="com.imaginea.dc.svmutils.DataPreprocessor"></bean>
 </beans>
 
 

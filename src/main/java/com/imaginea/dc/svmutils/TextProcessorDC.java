@@ -1,4 +1,4 @@
-package com.imaginea.dc.svm;
+package com.imaginea.dc.svmutils;
 
 import java.io.BufferedReader;
 import java.io.File;
