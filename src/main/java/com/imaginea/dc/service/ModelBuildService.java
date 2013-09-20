@@ -9,10 +9,8 @@ import com.imaginea.dc.entities.SVMInput;
 
 public interface ModelBuildService {
 
-	void startBuildingModel(boolean saveModel);
-	List<NewsArticle> fetchNewsArticleForBuildingModel();
-	List<SVMInput> convertNewsArticleToSVMData(List<NewsArticle> newsArticleList);
-	SVMModel buildModel(List<SVMInput> svmInput);
+	void startBuildingModel(boolean saveModel);		
+	SVMModel buildModel();
 	void saveModelToFile(SVMModel model);
 		
 }

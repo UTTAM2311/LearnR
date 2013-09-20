@@ -130,6 +130,8 @@
 		<property name="mahoutCauseClassifierModelBuilder" ref="mahoutCauseClassifierModelBuilder" />
 	</bean>
 	
+	<bean id="svmController" class="com.imaginea.dc.controllers.SVMController" scope="prototype">
+	</bean>
 
 	<!-- Services -->
 

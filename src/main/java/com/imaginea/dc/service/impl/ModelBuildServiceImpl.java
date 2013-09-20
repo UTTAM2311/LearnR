@@ -16,6 +16,7 @@ import libsvm.svm.model.SVNProblem;
 import com.imaginea.dc.api.IDao;
 import com.imaginea.dc.entities.NewsArticle;
 import com.imaginea.dc.entities.SVMInput;
+import com.imaginea.dc.service.DataPreProcessingService;
 import com.imaginea.dc.service.ModelBuildService;
 import com.imaginea.dc.service.NewsArticleService;
 import com.imaginea.dc.svmutils.DataPreprocessor;
@@ -27,6 +28,9 @@ public class ModelBuildServiceImpl implements ModelBuildService {
 	
 	@Autowired
 	private DataPreprocessor dataPreprocessor;
+	
+	@Autowired
+	private DataPreProcessingService dataPreprocessingService;
 	
 	@Autowired
 	private IDao genericDao;
@@ -44,44 +48,20 @@ public class ModelBuildServiceImpl implements ModelBuildService {
 	public void startBuildingModel(boolean saveModel) {
 		// TODO Auto-generated method stub
 
-		List<NewsArticle> newsArticleList = this.fetchNewsArticleForBuildingModel();
-		List<SVMInput> svmInput = this.convertNewsArticleToSVMData(newsArticleList);
-		SVMModel model = this.buildModel(svmInput);
+		//List<NewsArticle> newsArticleList = this.fetchNewsArticleForBuildingModel();
+		SVMModel model = this.buildModel();
 		this.saveModelToFile(model);
 		
 	}
 
 	@Override
-	public List<NewsArticle> fetchNewsArticleForBuildingModel() {
-		// TODO Auto-generated method stub
-		List<NewsArticle> newsArticleList = newsArticleService.fetchArticlesForTraining();
-		return newsArticleList;
-	}
-
-	@Override
-	public List<SVMInput> convertNewsArticleToSVMData(
-			List<NewsArticle> newsArticleList) {
-		// TODO Auto-generated method stub
-		List<SVMInput> svmInput = dataPreprocessor.preprocessData(newsArticleList, true);
-		return svmInput;
-	}
-
-	@Override
-	public SVMModel buildModel(List<SVMInput> inputData) {
+	public SVMModel buildModel() {
 		// TODO Auto-generated method stub
 		
 		SVNProblem problem = new SVNProblem();
 		
-		
-		ArrayList<String> inputFeatures = new ArrayList<String>();
-		ArrayList<String> outputVals = new ArrayList<String>();
-		
-		Iterator<SVMInput> inputDataIterator = inputData.iterator();
-		while (inputDataIterator.hasNext()){
-			SVMInput input = inputDataIterator.next();
-			inputFeatures.add(input.getInputLine());
-			outputVals.add(input.getOutputValue());
-		}
+		ArrayList<String> inputFeatures = dataPreprocessingService.getSVMInputData();
+		ArrayList<String> outputVals = dataPreprocessingService.getOutputValues();
 		
 		ArrayList nodes = this.getFeatureNodes(inputFeatures);
 		ArrayList outputValues = this.getOutputValues(outputVals);
@@ -190,7 +170,7 @@ public class ModelBuildServiceImpl implements ModelBuildService {
 	private ArrayList<FeatureNode> getFeatureNodeFromLine(String line){
 		String[] values = line.split(" ");
 		ArrayList<FeatureNode> featureNode = new ArrayList<FeatureNode>();
-		for (int j = 0; j < values.length; j++) {
+		for (int j = 1; j < values.length; j++) {
 			FeatureNode node = new FeatureNode();
 			if (!values[j].trim().equals("")) {
 				String[] ele = values[j].trim().split(":");
