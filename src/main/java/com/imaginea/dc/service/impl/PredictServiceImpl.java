@@ -150,7 +150,7 @@ public class PredictServiceImpl implements PredictService {
 		ArrayList<FeatureNode> featureNode = new ArrayList<FeatureNode>();
 		for (int j = 0; j < values.length; j++) {
 			FeatureNode node = new FeatureNode();
-			if (!values[j].trim().equals("")) {
+			if (!values[j].trim().equals("") && values[j].trim().contains(":")) {
 				String[] ele = values[j].trim().split(":");
 				node.index = Integer.parseInt(ele[0]);
 				node.value = Integer.parseInt(ele[1]);

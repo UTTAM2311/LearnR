@@ -45,7 +45,10 @@ public class TextProcessorDC extends TextProcessor {
 		while (iterator.hasNext()){
 			NewsArticle article = iterator.next();
 			String content = article.getContent();
-			boolean isPositive = article.getIsPositive();			
+			Object isPositiveObj = article.getIsPositive();
+			boolean isPositive = false;
+			if (isPositiveObj != null)
+				isPositive = (Boolean) isPositiveObj;
 			if (isPositive)
 				content = "1	"+content;
 			else
