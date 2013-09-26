@@ -17,6 +17,7 @@ import libsvm.svm.model.SVNProblem;
 import com.imaginea.dc.api.IDao;
 import com.imaginea.dc.entities.NewsArticle;
 import com.imaginea.dc.entities.SVMInput;
+import com.imaginea.dc.entities.SVMPredictedValues;
 import com.imaginea.dc.service.NewsArticleService;
 import com.imaginea.dc.service.PredictService;
 import com.imaginea.dc.svmutils.DataPreprocessor;
@@ -39,6 +40,7 @@ public class PredictServiceImpl implements PredictService {
 	}
 	
 	@Override
+	@Transactional
 	public void startPredictingUnlabelledData(boolean saveSVMInput,
 			boolean savePredictedData) {
 		// TODO Auto-generated method stub
@@ -110,15 +112,20 @@ public class PredictServiceImpl implements PredictService {
 		return inputData;		
 	}
 
-	@Override
-	@Transactional
+	@Override	
 	public void savePredictionToDB(List<SVMInput> predictedData) {
 		// TODO Auto-generated method stub
 		Iterator<SVMInput> predictedDataIterator = predictedData.iterator();
 		while (predictedDataIterator.hasNext()){
 			SVMInput input = predictedDataIterator.next();
-			input.setCreatedBy("PREDICTED");
-			genericDao.save(input);
+			/*input.setCreatedBy("PREDICTED");
+			genericDao.save(input);*/
+			
+			SVMPredictedValues predictedValues = new SVMPredictedValues();
+			predictedValues.setNewsArticle(input.getNewsArticle());
+			Double outputValue = Double.parseDouble(input.getOutputValue());
+			predictedValues.setPredictedValue(outputValue);
+			genericDao.save(predictedValues);
 		}
 	}
 
