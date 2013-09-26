@@ -117,6 +117,7 @@ public class PredictServiceImpl implements PredictService {
 		Iterator<SVMInput> predictedDataIterator = predictedData.iterator();
 		while (predictedDataIterator.hasNext()){
 			SVMInput input = predictedDataIterator.next();
+			input.setCreatedBy("PREDICTED");
 			genericDao.save(input);
 		}
 	}
