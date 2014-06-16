@@ -9,9 +9,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>news-cluster</artifactId>
+	<artifactId>news-analysis</artifactId>
 	
-	<name>news-cluster</name>
+	<name>news-analysis</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -449,7 +449,6 @@
 			</releases>
 		</repository>
 	</repositories>
-
 
 
 </project>
