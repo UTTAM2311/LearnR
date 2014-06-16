@@ -1,4 +1,4 @@
-DeathCluster
+TextCluster
 ============
 
-DeathCluster
+Text analysis
