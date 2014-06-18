@@ -4,16 +4,19 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.tc</groupId>
-	<artifactId>text-cluster</artifactId>
+	<groupId>com.learnr</groupId>
+	<artifactId>learnr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	
 	<packaging>pom</packaging>
 	
 	<modules>
-		<module>text-processor</module>
 		<module>news-analysis</module>
 		<module>patent-analysis</module>
+		
+		<module>text-processor</module>
+		<module>text-classification</module>
+		<module>text-clustering</module>
 	</modules>
 	
 </project>

@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.tc</groupId>
-		<artifactId>text-cluster</artifactId>
+		<groupId>com.learnr</groupId>
+		<artifactId>learnr</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
