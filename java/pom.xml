@@ -13,10 +13,7 @@
 	<modules>
 		<module>news-analysis</module>
 		<module>patent-analysis</module>
-		
-		<module>text-processor</module>
-		<module>text-classification</module>
-		<module>text-clustering</module>
+		<module>learnr-core</module>
 	</modules>
 	
 </project>
