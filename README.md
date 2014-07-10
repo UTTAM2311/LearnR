@@ -1,4 +1,4 @@
-TextCluster
+LearnR
 ============
 
-Text analysis
+A machine learning initiative ..
