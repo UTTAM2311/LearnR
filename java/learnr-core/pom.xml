@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>com.learnr</groupId>
 		<artifactId>learnr</artifactId>
@@ -15,6 +15,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
 		<mvn.compiler.plugin.version>3.1</mvn.compiler.plugin.version>
+		<aspectj.compiler.plugin.version>1.6</aspectj.compiler.plugin.version>
+		
+		<aspectj.version>1.8.1</aspectj.version>
 		
 		<junit.version>4.5</junit.version>
 		<logback.version>1.0.7</logback.version>
@@ -25,6 +28,14 @@
 	</properties>
 	
 	<dependencies>
+	
+		<!-- AspectJ -->
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
 	
 		<!-- Apache Commons Math -->
 		
@@ -72,6 +83,36 @@
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>${aspectj.compiler.plugin.version}</version>
+				<configuration>
+					<complianceLevel>${jdk.version}</complianceLevel>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				
+				<!-- 
+				<dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+                 -->
+			
 			</plugin>
 			
 		</plugins>
