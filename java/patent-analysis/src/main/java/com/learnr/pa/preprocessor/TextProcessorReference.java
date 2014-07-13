@@ -3,17 +3,13 @@ package com.learnr.pa.preprocessor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ejml.simple.SimpleMatrix;
-
 import textProcessor.options.Options;
-import edu.stanford.nlp.neural.NeuralUtils;
+
 
 public class TextProcessorReference {
 	
 	public static void processText(){
-		String text = "1";
-		SimpleMatrix simpleMatrix = NeuralUtils.convertTextMatrix(text);
-		System.out.println(simpleMatrix);
+		String text = "1";		
 	}
 	
 	public static void main(String args[]){
