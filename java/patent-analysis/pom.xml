@@ -215,6 +215,15 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Text Processor of Topic Miner -->
+		<dependency>
+    		<groupId>textProcessor</groupId>
+    		<artifactId>textProcessor</artifactId>    		
+    		<scope>system</scope>
+    		<version>1.0</version>
+    		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/TextProcessor.jar</systemPath>
+		</dependency>
 	
 	</dependencies>
 	
