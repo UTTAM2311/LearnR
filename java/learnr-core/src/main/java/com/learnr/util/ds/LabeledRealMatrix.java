@@ -1,6 +1,7 @@
 package com.learnr.util.ds;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.math3.exception.DimensionMismatchException;
@@ -16,7 +17,7 @@ import com.learnr.util.Verify;
 public class LabeledRealMatrix<RL, CL> extends Array2DRowRealMatrix implements LabeledMatrix<RL, CL> {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private final List<RL> rowLabels;
 	private final List<CL> columnLabels;
 
@@ -57,48 +58,47 @@ public class LabeledRealMatrix<RL, CL> extends Array2DRowRealMatrix implements L
 
 		if (rowLabels.size() != getRowDimension())
 			throw new DimensionMismatchException(rowLabels.size(), getRowDimension());
-		
+
 		if (columnLabels.size() != getColumnDimension())
 			throw new DimensionMismatchException(columnLabels.size(), getColumnDimension());
 
 		// Initialize Labels
 		this.rowLabels = rowLabels;
 		this.columnLabels = columnLabels;
-		
 	}
 
 	/* --- Implementations --- */
-	
+
 	@Override
 	public List<RL> getRowLabels() {
-		return rowLabels;
+		return Collections.unmodifiableList(rowLabels);
 	}
 
 	@Override
 	public List<CL> getColumnLabels() {
-		return columnLabels;
+		return Collections.unmodifiableList(columnLabels);
 	}
-	
+
 	@Override
 	public RL getRowLabel(int row) throws OutOfRangeException {
 		MatrixUtils.checkRowIndex(this, row);
-		return rowLabels.get(row);
+		return getRowLabels().get(row);
 	}
 
 	@Override
 	public CL getColumnLabel(int column) throws OutOfRangeException {
 		MatrixUtils.checkColumnIndex(this, column);
-		return columnLabels.get(column);
+		return getColumnLabels().get(column);
 	}
 
 	@Override
 	public int getRowIndex(RL rowLabel) throws LabelDoesNotExistException {
 		Verify.notNull(rowLabel);
-		
+
 		int index = rowLabels.indexOf(rowLabel);
-		if(index == -1) 
+		if (index == -1)
 			throw new LabelDoesNotExistException();
-		
+
 		return index;
 	}
 
@@ -107,22 +107,22 @@ public class LabeledRealMatrix<RL, CL> extends Array2DRowRealMatrix implements L
 		Verify.notNull(columnLabel);
 
 		int index = columnLabels.indexOf(columnLabel);
-		if(index == -1) 
+		if (index == -1)
 			throw new LabelDoesNotExistException();
-		
+
 		return index;
 	}
 
 	@Override
 	public LabeledRealVector<RL> getRowVector(RL rowLabel) throws LabelDoesNotExistException {
 		Verify.notNull(rowLabel);
-		return new LabeledRealVector<RL>(getRow(rowLabel), rowLabels);
+		return new LabeledRealVector<RL>(getRow(rowLabel), new ArrayList<RL>(rowLabels));
 	}
 
 	@Override
 	public LabeledRealVector<CL> getColumnVector(CL columnLabel) throws LabelDoesNotExistException {
 		Verify.notNull(columnLabel);
-		return new LabeledRealVector<CL>(getColumn(columnLabel), columnLabels);
+		return new LabeledRealVector<CL>(getColumn(columnLabel), new ArrayList<CL>(columnLabels));
 	}
 
 	@Override

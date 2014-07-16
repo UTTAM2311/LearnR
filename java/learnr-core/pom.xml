@@ -29,6 +29,15 @@
 	
 	<dependencies>
 	
+		<!-- Log Back -->
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		
+	
 		<!-- AspectJ -->
 
 		<dependency>
