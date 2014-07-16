@@ -13,7 +13,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 public class TextFileUtility {
 
-	private static int dimension=2;
+	private static int dimension=3;
 
 	public static RealMatrix readMatrixFromTextFile(String fileName) {
 
@@ -32,7 +32,7 @@ public class TextFileUtility {
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);
 				String[] lStrs = line.split("\\s+");
-				System.out.println(lStrs[1] + ", " +lStrs[1] + ", " + lStrs[2]);
+				System.out.println( lStrs[1] + ", " + lStrs[2]);
 
 				// Get point from str[]
 				point = getPoint(lStrs);
@@ -50,7 +50,7 @@ public class TextFileUtility {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+  System.out.println(points.size());
 		return getDataMatrix(points);
 	}
 
@@ -64,6 +64,7 @@ public class TextFileUtility {
 
 		for (int i = 0; i < size; i++) {
 			dataMatrix.setRow(i, points.get(i));
+			System.out.println(dataMatrix.getEntry(i, 0));
 		}
 
 		return dataMatrix;
@@ -72,10 +73,11 @@ public class TextFileUtility {
 	private static double[] getPoint(String[] lStrs) {
 
 		// TODO fix it later
-		int dimension = lStrs.length - 1;
+		int dimension = lStrs.length;
 		double[] point = new double[dimension];
 		for (int i = 0; i < dimension; i++) {
-			point[i] = Double.parseDouble(lStrs[i + 1]);
+			point[i] = Double.parseDouble(lStrs[i]);
+			System.out.println(point[i]);
 		}
 
 		return point;
