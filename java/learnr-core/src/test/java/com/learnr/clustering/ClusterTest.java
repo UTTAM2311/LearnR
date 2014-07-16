@@ -5,10 +5,14 @@ import java.util.List;
 
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.ml.clustering.CentroidCluster;
+import org.apache.commons.math3.ml.distance.DistanceMeasure;
+import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.junit.Assert;
 import org.junit.Test;
 
 import com.learnr.util.TextFileUtility;
+
+import edu.stanford.nlp.util.EditDistance;
 
 public class ClusterTest {
 	private static final String CLUSTER_DATASET_2D_1 = "C:\\Users\\manojm\\Desktop\\s1.txt";
@@ -42,6 +46,8 @@ public class ClusterTest {
 		Assert.assertEquals(4, ListSpiralKmeansPlusPLusClustersS2Data.size());
 		Assert.assertEquals(4, ListSpiralMultiKmeansPlusPLusClustersS2Data.size());
 		Assert.assertEquals(4, ListSpiralFuzzyKmeansClustersS2Data.size());
+		
+		DistanceMeasure dm = new EuclideanDistance();
 
 	}
 }

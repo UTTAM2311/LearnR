@@ -24,6 +24,7 @@ public class ClustersGenerator {
 	public static int size;
 
 	/**
+	 *  calculate the no of rows in the input matrix  
 	 * @param data
 	 *            input as RealMatrix
 	 */
@@ -37,9 +38,9 @@ public class ClustersGenerator {
 	}
 
 	/**
-	 * 
+	 * calculate the no of column in the input matrix and create datapoints
 	 * @param x
-	 *            as RealMatrix Reads RealMatrix x and stores points in a list
+	 *            as RealMatrix Reads RealMatrix x and create a list containing points
 	 */
 	public void readingDataFromMatrix(RealMatrix x) {
 		dimension = x.getColumnDimension();
@@ -91,7 +92,7 @@ public class ClustersGenerator {
 	 * @param noOfClusters
 	 *            as input
 	 * @param fuzzinessfactor
-	 *            a input
+	 *            as input
 	 * @return List of clusters
 	 */
 	public List<CentroidCluster<DataPoint>> generateFuzzyKMeansClusters(int noOfClusters, double fuzzinessfactor) {

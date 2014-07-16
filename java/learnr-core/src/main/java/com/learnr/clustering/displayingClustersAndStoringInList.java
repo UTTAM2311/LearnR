@@ -29,6 +29,7 @@ public class displayingClustersAndStoringInList {
 			List<DataPoint> cPoints = cluster.getPoints();
 			x = cPoints.get(0).getPoint();
 			dimension = x.length;
+			System.out.println(dimension);
 			System.out.println("Cluster " + (i + 1) + " data : " + cPoints);
 			Clusterable cCenter = cluster.getCenter();
 			System.out.println("Cluster " + (i + 1) + " center : " + cCenter);
