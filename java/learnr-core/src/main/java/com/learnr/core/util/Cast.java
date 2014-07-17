@@ -1,4 +1,4 @@
-package com.learnr.util;
+package com.learnr.core.util;
 
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.learnr.util.ds;
+package com.learnr.core.util.ds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.learnr.core.util.ds.LabeledMatrix;
+import com.learnr.core.util.ds.LabeledRealMatrix;
 
 public class LabeledRealMatrixTest {
 

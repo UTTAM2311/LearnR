@@ -1,4 +1,4 @@
-package com.learnr.util.ds;
+package com.learnr.core.util.ds;
 
 import java.util.List;
 
