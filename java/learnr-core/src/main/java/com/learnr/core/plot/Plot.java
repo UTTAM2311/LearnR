@@ -137,6 +137,11 @@ public class Plot {
 
 		frame = new JFrame(frameName);
 		frame.setContentPane(plotPanel);
+		
+		// Set Location and Dimension
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(800, 600);
+		frame.setLocation(200, 150);
 		frame.setVisible(true);
 	}
 
