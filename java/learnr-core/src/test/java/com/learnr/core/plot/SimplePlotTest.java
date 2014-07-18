@@ -5,11 +5,9 @@ import org.apache.commons.math3.linear.RealMatrix;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.learnr.core.util.ds.LabeledRealMatrixTest;
-
 public class SimplePlotTest {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LabeledRealMatrixTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(SimplePlotTest.class);
 	
 	private static RealMatrix data;
 
