@@ -1,5 +1,6 @@
 package com.learnr.core;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -69,5 +70,16 @@ public final class RealDataPoint<L> implements DataPoint<Double, L> {
 		return Collections.unmodifiableMap(metadata);
 	}
 
+	/* Other Methods */
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("RealDataPoint [");
+		sb.append("Dimension - " + dimension() + " : ");
+		sb.append(Arrays.toString(point()));
+		sb.append("]");
+		return sb.toString();
+	}
 	
 }

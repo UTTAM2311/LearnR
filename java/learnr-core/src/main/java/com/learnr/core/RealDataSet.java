@@ -92,6 +92,17 @@ public final class RealDataSet<RL, CL> implements DataSet<Double, RL, CL> {
 		
 		return Collections.unmodifiableMap(metadata);
 	}
+	
+	/* Other Methods */
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("RealDataSet [");
+		sb.append("Dimension - " + size() + " X " + dimension() +  " : ");
+		sb.append("]");
+		return sb.toString();
+	}
 
 
 }
