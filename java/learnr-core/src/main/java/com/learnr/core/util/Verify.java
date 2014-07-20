@@ -40,7 +40,7 @@ public class Verify {
 	 *             if expression is {@code false}
 	 */
 	public static void isTrue(boolean expression) {
-		isTrue(expression, "[Assertion failed] - this expression must be true");
+		isTrue(expression, "[failed] - this expression must be true");
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class Verify {
 	 *             if the object is not {@code null}
 	 */
 	public static void isNull(Object object) {
-		isNull(object, "[Assertion failed] - the object argument must be null");
+		isNull(object, "[failed] - the object argument must be null");
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class Verify {
 	 *             if the object is {@code null}
 	 */
 	public static void notNull(Object object) {
-		notNull(object, "[Assertion failed] - this argument is required; it must not be null");
+		notNull(object, "[failed] - this argument is required; it must not be null");
 	}
 	
 	/**
@@ -113,7 +113,7 @@ public class Verify {
 			return;
 
 		for (Object object : args) {
-			notNull(object, "[Assertion failed] - this argument is required; it must not be null");
+			notNull(object, "[failed] - this argument is required; it must not be null");
 		}
 	}
 
@@ -138,7 +138,7 @@ public class Verify {
 	 *            the String to check
 	 */
 	public static void hasLength(String text) {
-		hasLength(text, "[Assertion failed] - this String argument must have length; it must not be null or empty");
+		hasLength(text, "[failed] - this String argument must have length; it must not be null or empty");
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class Verify {
 	 *            the String to check
 	 */
 	public static void hasText(String text) {
-		hasText(text, "[Assertion failed] - this String argument must have text; it must not be null, empty, or blank");
+		hasText(text, "[failed] - this String argument must have text; it must not be null, empty, or blank");
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class Verify {
 	 *             if the object array is {@code null} or has no elements
 	 */
 	public static void notEmpty(Object[] array) {
-		notEmpty(array, "[Assertion failed] - this array must not be empty: it must contain at least 1 element");
+		notEmpty(array, "[failed] - this array must not be empty: it must contain at least 1 element");
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class Verify {
 	 *             if the object array contains a {@code null} element
 	 */
 	public static void noNullElements(Object[] array) {
-		noNullElements(array, "[Assertion failed] - this array must not contain any null elements");
+		noNullElements(array, "[failed] - this array must not contain any null elements");
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class Verify {
 	 */
 	public static void notEmpty(Collection<? extends Object> collection) {
 		notEmpty(collection,
-				"[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
+				"[failed] - this collection must not be empty: it must contain at least 1 element");
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class Verify {
 	 *             if the map is {@code null} or has no entries
 	 */
 	public static void notEmpty(Map<? extends Object, ? extends Object> map) {
-		notEmpty(map, "[Assertion failed] - this map must not be empty; it must contain at least one entry");
+		notEmpty(map, "[failed] - this map must not be empty; it must contain at least one entry");
 	}
 
 	/**
@@ -379,7 +379,7 @@ public class Verify {
 			}
 		}
 		
-		throw new IllegalArgumentException("[Assertion failed] - the collection does not contain the passed entry");
+		throw new IllegalArgumentException("[failed] - the collection does not contain the passed entry");
 	}
 
 }

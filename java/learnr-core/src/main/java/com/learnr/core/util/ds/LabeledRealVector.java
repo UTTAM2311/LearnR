@@ -17,6 +17,12 @@ public class LabeledRealVector<L> extends ArrayRealVector {
 	private final List<L> labels;
 
 	/* --- Constructors  --- */
+	
+	public LabeledRealVector() {
+
+		// labels
+		this.labels = new ArrayList<L>();
+	}
 
 	public LabeledRealVector(double[] d) {
 		super(d);

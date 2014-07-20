@@ -10,7 +10,7 @@ import org.apache.commons.math3.ml.distance.EuclideanDistance;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.learnr.util.TextFileUtility;
+import com.learnr.core.test.TestDataSets;
 
 import edu.stanford.nlp.util.EditDistance;
 
@@ -29,25 +29,25 @@ public class ClusterTest {
 
 	@Test
 	public void testingData() {
-		s1data = TextFileUtility.readMatrixFromTextFile(CLUSTER_DATASET_2D_1);
-		s2data = TextFileUtility.readMatrixFromTextFile(CLUSTER_DATASET_2D_3);
-		ClustersGenerator cgspiral = new ClustersGenerator(s1data);
-		ListSpiralKmeansPlusPLusClustersSpialData = cgspiral.generaterKMeansPlusPlusClusters(noOfClusters);
-		ListSpiralMultiKmeansPlusPLusClustersSpiralData = cgspiral
-				.generaterMultipleKMeansPlusPlusClusters(noOfClusters);
-		ListSpiralFuzzyKmeansClustersSpiralData = cgspiral.generateFuzzyKMeansClusters(noOfClusters, fuzzinessFactor);
-		Assert.assertEquals(4, ListSpiralKmeansPlusPLusClustersSpialData.size());
-		Assert.assertEquals(4, ListSpiralMultiKmeansPlusPLusClustersSpiralData.size());
-		Assert.assertEquals(4, ListSpiralFuzzyKmeansClustersSpiralData.size());
-		ClustersGenerator cgs2 = new ClustersGenerator(s2data);
-		ListSpiralKmeansPlusPLusClustersS2Data = cgs2.generaterKMeansPlusPlusClusters(noOfClusters);
-		ListSpiralMultiKmeansPlusPLusClustersS2Data = cgs2.generaterMultipleKMeansPlusPlusClusters(noOfClusters);
-		ListSpiralFuzzyKmeansClustersS2Data = cgs2.generateFuzzyKMeansClusters(noOfClusters, fuzzinessFactor);
-		Assert.assertEquals(4, ListSpiralKmeansPlusPLusClustersS2Data.size());
-		Assert.assertEquals(4, ListSpiralMultiKmeansPlusPLusClustersS2Data.size());
-		Assert.assertEquals(4, ListSpiralFuzzyKmeansClustersS2Data.size());
-		
-		DistanceMeasure dm = new EuclideanDistance();
+//		s1data = TestDataSets.readMatrixFromTextFile(CLUSTER_DATASET_2D_1);
+//		s2data = TestDataSets.readMatrixFromTextFile(CLUSTER_DATASET_2D_3);
+//		ClustersGenerator cgspiral = new ClustersGenerator(s1data);
+//		ListSpiralKmeansPlusPLusClustersSpialData = cgspiral.generaterKMeansPlusPlusClusters(noOfClusters);
+//		ListSpiralMultiKmeansPlusPLusClustersSpiralData = cgspiral
+//				.generaterMultipleKMeansPlusPlusClusters(noOfClusters);
+//		ListSpiralFuzzyKmeansClustersSpiralData = cgspiral.generateFuzzyKMeansClusters(noOfClusters, fuzzinessFactor);
+//		Assert.assertEquals(4, ListSpiralKmeansPlusPLusClustersSpialData.size());
+//		Assert.assertEquals(4, ListSpiralMultiKmeansPlusPLusClustersSpiralData.size());
+//		Assert.assertEquals(4, ListSpiralFuzzyKmeansClustersSpiralData.size());
+//		ClustersGenerator cgs2 = new ClustersGenerator(s2data);
+//		ListSpiralKmeansPlusPLusClustersS2Data = cgs2.generaterKMeansPlusPlusClusters(noOfClusters);
+//		ListSpiralMultiKmeansPlusPLusClustersS2Data = cgs2.generaterMultipleKMeansPlusPlusClusters(noOfClusters);
+//		ListSpiralFuzzyKmeansClustersS2Data = cgs2.generateFuzzyKMeansClusters(noOfClusters, fuzzinessFactor);
+//		Assert.assertEquals(4, ListSpiralKmeansPlusPLusClustersS2Data.size());
+//		Assert.assertEquals(4, ListSpiralMultiKmeansPlusPLusClustersS2Data.size());
+//		Assert.assertEquals(4, ListSpiralFuzzyKmeansClustersS2Data.size());
+//		
+//		DistanceMeasure dm = new EuclideanDistance();
 
 	}
 }

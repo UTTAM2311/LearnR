@@ -24,7 +24,8 @@ public class ClustersGenerator {
 	public static int size;
 
 	/**
-	 *  calculate the no of rows in the input matrix  
+	 * calculate the no of rows in the input matrix
+	 * 
 	 * @param data
 	 *            input as RealMatrix
 	 */
@@ -39,6 +40,7 @@ public class ClustersGenerator {
 
 	/**
 	 * calculate the no of column in the input matrix and create datapoints
+	 * 
 	 * @param x
 	 *            as RealMatrix Reads RealMatrix x and create a list containing points
 	 */
