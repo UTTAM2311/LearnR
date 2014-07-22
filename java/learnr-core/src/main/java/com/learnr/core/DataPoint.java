@@ -26,13 +26,6 @@ public interface DataPoint<T, L> {
 	Integer dimension();
 
 	/**
-	 * Returns the array/list representation of the point's data in the defined data type
-	 * 
-	 * @return point as array
-	 */
-	T[] point();
-
-	/**
 	 * Get the point as a Labelled vector
 	 * 
 	 * @return

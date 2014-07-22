@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.learnr.core.util.PrimitiveUtils;
+import org.apache.commons.math3.ml.clustering.Clusterable;
+
 import com.learnr.core.util.Verify;
 import com.learnr.core.util.ds.LabeledRealVector;
 
 /**
  * Basic concrete implementation of {@link DataPoint} with the Generic data type as {@link Double}.
  */
-public final class RealDataPoint<L> implements DataPoint<Double, L> {
+public final class RealDataPoint<L> implements DataPoint<Double, L>, Clusterable {
 	
 	private final LabeledRealVector<L> lVector;
 	private Map<String, Object> metadata = new HashMap<>();
@@ -53,11 +54,6 @@ public final class RealDataPoint<L> implements DataPoint<Double, L> {
 	}
 
 	@Override
-	public Double[] point() {
-		return PrimitiveUtils.toWrapper(lVector.toArray());
-	}
-
-	@Override
 	public LabeledRealVector<L> asVector() {
 		return lVector;
 	}
@@ -69,6 +65,11 @@ public final class RealDataPoint<L> implements DataPoint<Double, L> {
 		
 		return Collections.unmodifiableMap(metadata);
 	}
+	
+	@Override
+	public double[] getPoint() {
+		return lVector.toArray();
+	}
 
 	/* Other Methods */
 	
@@ -77,7 +78,7 @@ public final class RealDataPoint<L> implements DataPoint<Double, L> {
 		StringBuilder sb = new StringBuilder();
 		sb.append("RealDataPoint [");
 		sb.append("Dimension - " + dimension() + " : ");
-		sb.append(Arrays.toString(point()));
+		sb.append(Arrays.toString(this.getPoint()));
 		sb.append("]");
 		return sb.toString();
 	}

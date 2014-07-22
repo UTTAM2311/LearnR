@@ -2,6 +2,9 @@ package com.learnr.core;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.learnr.core.util.ds.LabeledRealMatrix;
 import com.learnr.core.util.ds.LabeledRealVector;
 
@@ -14,6 +17,8 @@ import com.learnr.core.util.ds.LabeledRealVector;
  * @see LabeledRealMatrix
  */
 public class RealDataUtils {
+	
+	private static final Logger logger = LoggerFactory.getLogger(RealDataUtils.class);
 
 	/**
 	 * Converts a list of {@link DataPoint}s to a double array.
