@@ -23,7 +23,7 @@ public class LemmatizerTest {
 	
 	@Before
 	public void init() {
-
+		lemmatizer = new Lemmatizer();
 	}
 
 	@After
@@ -36,10 +36,16 @@ public class LemmatizerTest {
 	public void test_lemmatize_null_argument() {
 		lemmatizer.lemmatize(null);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void test_lemmatize_empty_string() {
+		lemmatizer.lemmatize("");
+	}
 
 	@Test
 	public void test_lemmatize_str_with_4words() {
 		List<String> lemmas = lemmatizer.lemmatize(I_AM_A_BOY);
+		logger.info("Lemmas for \"" + I_AM_A_BOY + "\" are : " + lemmas);
 		Assert.assertEquals(4, lemmas.size());
 		Assert.assertEquals(true, lemmas.contains("be"));
 	}
@@ -47,6 +53,7 @@ public class LemmatizerTest {
 	@Test
 	public void test_lemmatize_str_with_3words() {
 		List<String> lemmas = lemmatizer.lemmatize(I_AM_RUNNING);
+		logger.info("Lemmas for \"" + I_AM_RUNNING + "\" are : " + lemmas);
 		Assert.assertEquals(3, lemmas.size());
 		Assert.assertEquals(true, lemmas.contains("run"));
 		Assert.assertEquals(true, lemmas.contains("be"));
