@@ -9,45 +9,41 @@ import java.util.Map;
 public class StopWordUtil {
 	// method for finding stop words
 	public List<String> StopWords(List<Map> listOfMaps) {
-		int size, k = 0;
-		List<String> stopwords = new ArrayList<String>();
-		Map<String, Integer> totalMap = new HashMap<String, Integer>();
-		size = listOfMaps.size();
-		for (int i = 0; i < size; i++) {
-			totalMap.putAll(listOfMaps.get(i));
-		}
-		List<String> listOfKeysetsOfTotalMap = new ArrayList<String>(totalMap.keySet());
-		Collections.sort(listOfKeysetsOfTotalMap);
-		for (int i = 0; i < size - 1; i++) {
-			if (listOfMaps.get(i).size() > listOfMaps.get(i + 1).size()) {
-				k = i + 1;
-			} else {
-				k = i;
+		if (listOfMaps.size() == 1 || listOfMaps.size() == 0) {
+			return null;
+		} else {
+			List<String> listOfAllWords = new ArrayList<String>();
+			List<String> stopwords = new ArrayList<String>();
+			int size = listOfMaps.size();
+			for (int i = 0; i < size; i++) {
+				listOfAllWords.addAll(listOfMaps.get(i).keySet());
 			}
-		}
-		List<String> listOfkeysetsOfListOfMaps = new ArrayList<String>(listOfMaps.get(k).keySet());
-		int size2;
-		size2 = listOfkeysetsOfListOfMaps.size();
-		for (int i = 0; i < size2; i++) {
-			for (int j = 0; j < size2; j++) {
-				if (listOfKeysetsOfTotalMap.get(i).equals(listOfkeysetsOfListOfMaps.get(j))) {
-					stopwords.add(listOfKeysetsOfTotalMap.get(i));
+			Collections.sort(listOfAllWords);
+			int size1 = listOfAllWords.size(), b = 0, a;
+			for (int i = b; i < size1; i = b) {
+				a = 0;
+				b++;
+				for (int j = i + 1; j < size1; j++) {
+					if (listOfAllWords.get(i).equals(listOfAllWords.get(j))) {
+						a++;
+						b++;
+					}
+
+				}
+				if (a == size - 1) {
+					stopwords.add(listOfAllWords.get(i));
 				}
 			}
+			return stopwords;
 		}
-		return stopwords;
 	}
-// method for converting a Listofstrings to a map
+
+	// method for converting a Listofstrings to a map
 	public Map<String, Integer> getWordCount(List<String> inStrs) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		int size = inStrs.size();
-		String covertionToLowerCase;
 		int count = 0, k = 0;
-		for (int i = 0; i < size; i++) {
-			covertionToLowerCase = inStrs.get(i).toLowerCase();
-			inStrs.remove(i);
-			inStrs.add(i, covertionToLowerCase);
-		}
+		inStrs = covertionToLowerCase(inStrs);
 		Collections.sort(inStrs);
 		for (int i = k; i < size; i = k) {
 			count = 1;
@@ -65,35 +61,44 @@ public class StopWordUtil {
 		return map;
 
 	}
-// this method is for getting final word map of all the strings
-	public static Map<String, Integer> getMap(List<Map> listOfMaps) {
-		int size, k = 0;
-		Map<String, Integer> totalMap = new HashMap<String, Integer>();
-		size = listOfMaps.size();
+
+	// this method is for getting final word map of all the strings
+	public  Map<String, Integer> getMap(List<Map> listOfMaps) {
+		List<String> listOfAllWords = new ArrayList<String>();
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int size = listOfMaps.size();
 		for (int i = 0; i < size; i++) {
-			totalMap.putAll(listOfMaps.get(i));
+			listOfAllWords.addAll(listOfMaps.get(i).keySet());
 		}
-		List<String> listOfKeysetsOfTotalMap = new ArrayList<String>(totalMap.keySet());
-		Collections.sort(listOfKeysetsOfTotalMap);
-		for (int i = 0; i < size - 1; i++) {
-			if (listOfMaps.get(i).size() > listOfMaps.get(i + 1).size()) {
-				k = i + 1;
-			} else {
-				k = i;
-			}
-		}
-		List<String> listOfkeysetsOfListOfMaps = new ArrayList<String>(listOfMaps.get(k).keySet());
-		int size2;
-		String key;
-		size2 = listOfkeysetsOfListOfMaps.size();
-		for (int i = 0; i < size2; i++) {
-			for (int j = 0; j < size2; j++) {
-				if (listOfKeysetsOfTotalMap.get(i).equals(listOfkeysetsOfListOfMaps.get(j))) {
-					key = listOfKeysetsOfTotalMap.get(i);
-					totalMap.remove(key);
+		Collections.sort(listOfAllWords);
+		int  size1 = listOfAllWords.size(), a;
+		for (int i = 0; i < size1-1; i++ ) {
+			
+			a = 0;
+			for (int j = i + 1; j < size1; j++) {
+				if (listOfAllWords.get(i).equals(listOfAllWords.get(j))) {
+					a++;
 				}
 			}
+			if(a == size-1)
+			{
+				for(int k=i;k<i+size;k++)
+					listOfAllWords.remove(0);
+				size1 = size1-size;
+			}
 		}
-		return totalMap;
+		map = getWordCount(listOfAllWords);
+		return map;
+	}
+	private List<String> covertionToLowerCase(List<String> listOfAllWords)
+	{
+		String covertionToLowerCase;
+		int size = listOfAllWords.size();
+		for (int i = 0; i < size; i++) {
+			covertionToLowerCase = listOfAllWords.get(i).toLowerCase();
+			listOfAllWords.remove(i);
+			listOfAllWords.add(i, covertionToLowerCase);
+		}
+		return listOfAllWords;
 	}
 }
