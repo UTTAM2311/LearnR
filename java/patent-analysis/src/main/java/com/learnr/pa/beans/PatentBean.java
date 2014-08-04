@@ -5,17 +5,29 @@ import java.util.List;
 public class PatentBean {
 
 	private Integer id;
+	private String patentNumber;
 	private String title;
-	private String simpleAbstract;
+	private String pAbstract;
 	private String description;
 	private List<String> claims;
 
+	
+	/* --- Getters and Setters --- */
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getPatentNumber() {
+		return patentNumber;
+	}
+
+	public void setPatentNumber(String patentNumber) {
+		this.patentNumber = patentNumber;
 	}
 
 	public String getTitle() {
@@ -26,12 +38,12 @@ public class PatentBean {
 		this.title = title;
 	}
 
-	public String getSimpleAbstract() {
-		return simpleAbstract;
+	public String getAbstract() {
+		return pAbstract;
 	}
 
-	public void setSimpleAbstract(String simpleAbstract) {
-		this.simpleAbstract = simpleAbstract;
+	public void setAbstract(String simpleAbstract) {
+		this.pAbstract = simpleAbstract;
 	}
 
 	public String getDescription() {
