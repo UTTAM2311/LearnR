@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class StopWordUtil {
 	/**
@@ -48,7 +49,7 @@ public class StopWordUtil {
  * @return Word count in the form of a map
  */
 	public Map<String, Integer> getWordCount(List<String> inStrs) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Integer> map = new TreeMap<String, Integer>();
 		int size = inStrs.size();
 		int count = 0, k = 0;
 		inStrs = covertionToLowerCase(inStrs);
@@ -80,7 +81,7 @@ public class StopWordUtil {
 	public  Map<String, Integer> getMap(List<Map> listOfMaps,List<String> stopwords) {
 		List<String> Words = new ArrayList<String>();
 		List<String> listOfFinalWords = new ArrayList<String>();
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Integer> map = new TreeMap<String, Integer>();
 		int size = listOfMaps.size();
 		for(int i=0;i<size;i++)
 		{
@@ -128,7 +129,7 @@ public class StopWordUtil {
 	 * this method is to convert map to a list which containing a same word as many times as key value in map
 	 */
 	
-	public static List<String> mapTolist(Map<String,Integer> map){
+	public  List<String> mapTolist(Map<String,Integer> map){
 		List<String> list = new ArrayList<String>(map.keySet());
 		List<Integer> integer = new ArrayList<Integer>(map.values());
 		List<String> finalList = new ArrayList<String>();
@@ -143,5 +144,45 @@ public class StopWordUtil {
 		}
 		
 		return finalList;
+	}
+	/**
+	 * converts every map to have same dimensions
+	 * @param listOfMaps
+	 * @return listOfMaps
+	 */
+	public List<Map> dimensionVector(List<Map> listOfMaps){
+		int size = listOfMaps.size();
+		Map<String,Integer> bigMap = new TreeMap<String,Integer>();
+		for(int i=0;i<size;i++)
+		{
+			bigMap.putAll(listOfMaps.get(i));
+		}
+		List<String> biglist = new ArrayList<String>(bigMap.keySet());
+		List<String> smalllist = new ArrayList<String>();
+		int count;
+		for(int i=0;i<listOfMaps.size();i++)
+		{
+			smalllist.addAll(listOfMaps.get(i).keySet());
+			for(int j=0;j<biglist.size();j++)
+			{
+				count =0;
+				for(int k=0;k<smalllist.size();k++)
+				{
+					if(smalllist.get(k).equals(biglist.get(j)))
+					{
+						break;
+					}
+					else{
+						count = count+1;
+					}
+				}
+				if(count==smalllist.size())
+				{
+					listOfMaps.get(i).put(biglist.get(j), 0);
+				}
+			}
+			smalllist.clear();
+		}
+		return listOfMaps;
 	}
 }
