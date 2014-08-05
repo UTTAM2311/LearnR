@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.mahout.classifier.evaluation.Auc;
 import org.apache.mahout.classifier.sgd.AbstractOnlineLogisticRegression;
 import org.apache.mahout.classifier.sgd.L2;
 import org.apache.mahout.classifier.sgd.OnlineLogisticRegression;
@@ -38,23 +39,31 @@ public class LogReg {
 		LogReg.trainingData = trainingData;
 		LogReg.noOfFeatures = noOfFeatures;
 		LogReg.noOfCategories = noOfCategories;
-
-		AbstractOnlineLogisticRegression model = new OnlineLogisticRegression(noOfCategories, noOfFeatures + 1, new L2(1));
+		Auc x = new Auc(0.75);
+		AbstractOnlineLogisticRegression model = new OnlineLogisticRegression(noOfCategories, noOfFeatures + 1, new L2(
+				1));
 		List<Vector> data = Lists.newArrayList();
 		data.addAll(trainingData.keySet());
 		List<Integer> target = Lists.newArrayList();
 		System.out.println(data.size());
 		target.addAll(trainingData.values());
-		 System.out.println("target value "+target.get(2)+"vector value"+data.get(2));
-		for (int k =0; k <= data.size(); k++) {
+		System.out.println("target value " + target.get(2) + "vector value" + data.get(2));
+		System.out.println(data.size());
+		for (int k = 0; k < data.size(); k++) {
 			System.out.println("vector " + data.get(k) + "\t target value " + target.get(k));
 			model.train(target.get(k), data.get(k));
+
 		}
+		for (int k = 0; k < data.size(); k++) {
+			x.add(target.get(k), model.classifyFull(data.get(k)).maxValueIndex());
+		}
+		System.out.println(x.auc());
+		System.out.println(x.confusion());
 		return model;
 	}
 
 	/**
-	 * Converts the testfile into a  vector list
+	 * Converts the testfile into a vector list
 	 * 
 	 * @param Testfile
 	 *            ---training data file
