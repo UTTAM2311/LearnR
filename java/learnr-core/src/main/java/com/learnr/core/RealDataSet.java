@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.learnr.core.util.Verify;
-import com.learnr.core.util.ds.LabeledMatrix;
-import com.learnr.core.util.ds.LabeledRealMatrix;
+import com.learnr.core.ds.LabeledMatrix;
+import com.learnr.core.ds.LabeledRealMatrix;
+import com.learnr.util.Verify;
 
 /**
  * Basic concrete implementation of {@link DataSet} with the Generic data type as {@link Double}.

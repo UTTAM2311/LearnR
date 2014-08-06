@@ -11,8 +11,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.learnr.core.util.ds.LabeledMatrix;
-import com.learnr.core.util.ds.LabeledRealMatrix;
+import com.learnr.core.ds.LabeledMatrix;
+import com.learnr.core.ds.LabeledRealMatrix;
 
 public class LabeledRealMatrixTest {
 

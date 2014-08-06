@@ -7,7 +7,7 @@ import org.math.plot.Plot2DPanel;
 import org.math.plot.Plot3DPanel;
 import org.math.plot.PlotPanel;
 
-import com.learnr.core.util.Verify;
+import com.learnr.util.Verify;
 
 public class Plot {
 

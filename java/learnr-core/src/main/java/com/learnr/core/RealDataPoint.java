@@ -8,8 +8,8 @@ import java.util.Map;
 
 import org.apache.commons.math3.ml.clustering.Clusterable;
 
-import com.learnr.core.util.Verify;
-import com.learnr.core.util.ds.LabeledRealVector;
+import com.learnr.core.ds.LabeledRealVector;
+import com.learnr.util.Verify;
 
 /**
  * Basic concrete implementation of {@link DataPoint} with the Generic data type as {@link Double}.

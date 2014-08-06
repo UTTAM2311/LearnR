@@ -3,8 +3,8 @@ package com.learnr.core;
 import java.util.List;
 import java.util.Map;
 
-import com.learnr.core.util.ds.LabeledMatrix;
-import com.learnr.core.util.ds.LabeledRealVector;
+import com.learnr.core.ds.LabeledMatrix;
+import com.learnr.core.ds.LabeledRealVector;
 
 /**
  * DataSet is a representation of a list of ordered {@link IDataPoint}s. This also contains the label of each dimension

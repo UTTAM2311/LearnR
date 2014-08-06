@@ -5,8 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.learnr.core.util.ds.LabeledRealMatrix;
-import com.learnr.core.util.ds.LabeledRealVector;
+import com.learnr.core.ds.LabeledRealMatrix;
+import com.learnr.core.ds.LabeledRealVector;
 
 /**
  * Odd ball utilities for Real valued DataStructures. Mainly meant for {@link DataSet} and {@link DataPoint}.

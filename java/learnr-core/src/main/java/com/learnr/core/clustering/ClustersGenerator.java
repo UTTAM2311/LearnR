@@ -16,8 +16,8 @@ import org.slf4j.LoggerFactory;
 
 import com.learnr.core.RealDataPoint;
 import com.learnr.core.RealDataSet;
-import com.learnr.core.util.Verify;
-import com.learnr.core.util.ds.LabeledRealMatrix;
+import com.learnr.core.ds.LabeledRealMatrix;
+import com.learnr.util.Verify;
 
 public class ClustersGenerator {
 

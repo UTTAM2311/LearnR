@@ -1,4 +1,4 @@
-package com.learnr.core.util.ds;
+package com.learnr.core.ds;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +12,7 @@ import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.MatrixUtils;
 
-import com.learnr.core.util.Verify;
+import com.learnr.util.Verify;
 
 public class LabeledRealMatrix<RL, CL> extends Array2DRowRealMatrix implements LabeledMatrix<RL, CL> {
 

@@ -1,4 +1,4 @@
-package com.learnr.core.util.ds;
+package com.learnr.core.ds;
 
 public class LabelDoesNotExistException extends RuntimeException {
 

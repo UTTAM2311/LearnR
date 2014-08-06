@@ -2,7 +2,7 @@ package com.learnr.core;
 
 import java.util.Map;
 
-import com.learnr.core.util.ds.LabeledRealVector;
+import com.learnr.core.ds.LabeledRealVector;
 
 /**
  * A representation of an ordered data point (in a way you can call it a Vector).

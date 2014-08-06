@@ -1,4 +1,4 @@
-package com.learnr.core.util.ds;
+package com.learnr.core.ds;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import org.apache.commons.math3.exception.DimensionMismatchException;
 import org.apache.commons.math3.exception.OutOfRangeException;
 import org.apache.commons.math3.linear.ArrayRealVector;
 
-import com.learnr.core.util.Verify;
+import com.learnr.util.Verify;
 
 public class LabeledRealVector<L> extends ArrayRealVector {
 

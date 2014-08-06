@@ -29,6 +29,14 @@
 	
 	<dependencies>
 	
+		<!-- LearnR dependencies -->
+		
+		<dependency>
+			<groupId>com.learnr</groupId>
+			<artifactId>learnr-util</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+	
 		<!-- Log Back -->
 
 		<dependency>
