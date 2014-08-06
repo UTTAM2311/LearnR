@@ -33,6 +33,7 @@ public class PatentExcelUtil {
 
 	private static Map<PatentExcelType, String> fileNameMap;
 	private static String SAMPLE_FILE_PATH = "sample-files-rpx/";
+	
 	/* Static Initialization */
 
 	static {
