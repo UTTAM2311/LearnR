@@ -50,10 +50,12 @@ public class PatentExcelReadTest {
 		logger.info("Total no of patents found : " + pats.size());
 		
 		Map<String, String> patAbsMap = this.getIdToAbstractTextMap(pats);
+		List<String> abs = (List<String>) patAbsMap.values();
+		
+		// Cluster them
 		
 		
 		
-		Assert.assertNotNull(pats);
 		
 		
 	}
