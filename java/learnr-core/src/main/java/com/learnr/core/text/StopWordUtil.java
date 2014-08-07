@@ -13,7 +13,7 @@ public class StopWordUtil {
 	 * @param listOfMaps
 	 * @return List of stopwords
 	 */
-	public List<String> StopWords(List<Map> listOfMaps) {
+	public List<String> StopWords(List<Map<String, Integer>> listOfMaps) {
 		if (listOfMaps.size() == 1 || listOfMaps.size() == 0) {
 			return null;
 		} else {
@@ -150,7 +150,7 @@ public class StopWordUtil {
 	 * @param listOfMaps
 	 * @return listOfMaps
 	 */
-	public List<Map> dimensionVector(List<Map> listOfMaps){
+	public List<Map<String, Integer>> dimensionVector(List<Map<String, Integer>> listOfMaps){
 		int size = listOfMaps.size();
 		Map<String,Integer> bigMap = new TreeMap<String,Integer>();
 		for(int i=0;i<size;i++)
