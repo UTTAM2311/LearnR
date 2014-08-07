@@ -35,11 +35,11 @@
 	
 		<!-- LearnR dependencies -->
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>com.learnr</groupId>
 			<artifactId>learnr-core</artifactId>
 			<version>${project.parent.version}</version>
-		</dependency> -->
+		</dependency>
 		
 		
 		<!-- Log Back -->

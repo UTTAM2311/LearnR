@@ -1,4 +1,4 @@
-package com.learnr.pa.beans;
+package com.learnr.pa.bean;
 
 import java.util.List;
 

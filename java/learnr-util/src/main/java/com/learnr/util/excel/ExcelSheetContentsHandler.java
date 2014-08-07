@@ -189,7 +189,7 @@ public class ExcelSheetContentsHandler<T extends IExcelEntity> implements SheetC
 		
 		String entityPropName = this.entityPropertyMapping.get(cellColName);
 		if(entityPropName == null || entityPropName.isEmpty()) {
-			logger.error("No mathching property is found / is mapped for column with name :" + cellColName);
+			logger.debug("No mathching property is found / is mapped for column with name :" + cellColName);
 			return;
 		}
 		
