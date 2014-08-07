@@ -19,6 +19,8 @@
 		
 		<aspectj.version>1.8.1</aspectj.version>
 		
+		<mahout.version>0.9</mahout.version>
+		
 		<junit.version>4.5</junit.version>
 		<logback.version>1.0.7</logback.version>
 		
@@ -76,6 +78,17 @@
 		    <version>${stanford.nlp.version}</version>
 		    <classifier>models</classifier>
 		</dependency>
+		
+		
+		<!-- Mahout -->
+		
+		<dependency>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout-core</artifactId>
+			<version>${mahout.version}</version>
+		</dependency>
+		
+		<!-- JMath Plot -->
 		
 		<dependency>
 			<groupId>jmathplot</groupId>
