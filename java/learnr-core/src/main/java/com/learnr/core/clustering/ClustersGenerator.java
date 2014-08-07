@@ -56,7 +56,7 @@ public class ClustersGenerator {
 
 	public List<CentroidCluster<Clusterable>> clusterUsingKMeansPlusPlus(int noOfClusters) {
 		Verify.notNull(noOfClusters);
-		Verify.isTrue(noOfClusters == 0);
+		//Verify.isTrue(noOfClusters == 0);
 		
 		// Kmeans Clustering
 		KMeansPlusPlusClusterer<Clusterable> kMeansClusterer = new KMeansPlusPlusClusterer<Clusterable>(noOfClusters);

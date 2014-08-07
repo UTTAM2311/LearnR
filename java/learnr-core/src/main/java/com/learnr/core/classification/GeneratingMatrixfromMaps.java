@@ -11,6 +11,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 
 
+
 public class GeneratingMatrixfromMaps {
 	/**
 	 * Converts list of mappings into matrix where each map is a row.

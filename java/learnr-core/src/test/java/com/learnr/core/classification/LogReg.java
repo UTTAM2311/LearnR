@@ -57,8 +57,8 @@ public class LogReg {
 		for (int k = 0; k < data.size(); k++) {
 			x.add(target.get(k), model.classifyFull(data.get(k)).maxValueIndex());
 		}
-		System.out.println(x.auc());
-		System.out.println(x.confusion());
+	//	System.out.println(x.auc());
+	//	System.out.println(x.confusion());
 		return model;
 	}
 

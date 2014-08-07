@@ -14,6 +14,6 @@ public class classTest {
 		dataMapper data = new dataMapper();
 
 		LogReg.trainModel(data.getVectorsAndTargetValues(filename, 12), 12, 3);
-		// LogReg.test(LogReg.convertTestfile(filename1));
+		//LogReg.test(LogReg.convertTestfile(filename1));
 	}
 }
