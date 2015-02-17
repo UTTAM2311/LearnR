@@ -19,6 +19,8 @@
 		
 		<aspectj.version>1.8.1</aspectj.version>
 		
+		<mahout.version>0.9</mahout.version>
+		
 		<junit.version>4.5</junit.version>
 		<logback.version>1.0.7</logback.version>
 		
@@ -77,13 +79,15 @@
 		    <classifier>models</classifier>
 		</dependency>
 		
+		
+		<!-- Mahout -->
+		
 		<dependency>
-			<groupId>jmathplot</groupId>
-			<artifactId>jmathplot</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/jmathplot.jar</systemPath>
+			<groupId>org.apache.mahout</groupId>
+			<artifactId>mahout-core</artifactId>
+			<version>${mahout.version}</version>
 		</dependency>
+		
 		
 		
 		<!-- Testing : JUnit -->

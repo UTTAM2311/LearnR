@@ -19,10 +19,11 @@
 		<jdk.version>1.7</jdk.version>
 		<mvn.compiler.plugin.version>3.1</mvn.compiler.plugin.version>
 		
-		<apache.poi.version>3.9</apache.poi.version>
-		
 		<junit.version>4.5</junit.version>
 		<logback.version>1.0.7</logback.version>
+
+		<apache.poi.version>3.9</apache.poi.version>
+		<apache.commons.math.version>3.3</apache.commons.math.version>
 		
 	</properties>
 	
@@ -61,6 +62,27 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.7.0</version>
 		</dependency>
+		
+		
+		<!-- Apache Commons Math -->
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>${apache.commons.math.version}</version>
+		</dependency>
+		
+		
+		<!-- JMath Plot -->
+		
+		<dependency>
+			<groupId>jmathplot</groupId>
+			<artifactId>jmathplot</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/jmathplot.jar</systemPath>
+		</dependency>
+		
 		
 		<!-- Testing : JUnit -->
 

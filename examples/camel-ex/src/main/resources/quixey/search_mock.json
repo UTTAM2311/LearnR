@@ -1,0 +1,33 @@
+{
+    "name" : "Quixey,
+    "version" : "v2",
+    "prefix" : "",
+    "endpoints" : [
+        {
+            "path" : "/order",
+            "proxy_to" : "",
+            "methods" : [
+                {
+                    "method" : "GET",
+                    "result" : [
+                        { "id" : 11712, "product" : "Car" },
+                        { "id" : 112, "product" : "Bicycle" }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/customer",
+            "methods": [
+                {
+                    "method": "GET",
+                    "result": { 
+                        "cust_id" : 12254,
+                        "name" : "peter parker" 
+                    }
+                }
+            ]
+        }
+    ],
+    "global" : {}
+}

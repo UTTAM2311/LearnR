@@ -1,0 +1,32 @@
+{
+    "name" : "Office Pramati",
+    "version" : "v1",
+    "prefix" : "/api/v1",
+    "endpoints" : [
+        {
+            "path" : "/order",
+            "methods" : [
+                {
+                    "method" : "GET",
+                    "result" : [
+                        { "id" : 11712, "product" : "Car" },
+                        { "id" : 112, "product" : "Bicycle" }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/customer",
+            "methods": [
+                {
+                    "method": "GET",
+                    "result": { 
+                        "cust_id" : 12254,
+                        "name" : "peter parker" 
+                    }
+                }
+            ]
+        }
+    ],
+    "global" : {}
+}

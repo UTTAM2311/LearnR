@@ -1,32 +1,42 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	
+
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>com.learnr</groupId>
 		<artifactId>learnr</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>learnr-hadoop</artifactId>
-	
+
 	<name>learnr-hadoop</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
 		<mvn.compiler.plugin.version>3.1</mvn.compiler.plugin.version>
-		
+
 		<junit.version>4.5</junit.version>
 		<logback.version>1.0.7</logback.version>
-		
+
 	</properties>
-	
+
 	<dependencies>
 	
+		<!-- LearnR dependencies -->
+
+		<dependency>
+			<groupId>com.learnr</groupId>
+			<artifactId>learnr-core</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+
 		<!-- Log Back -->
 
 		<dependency>
@@ -34,9 +44,9 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-		
-	
-		
+
+
+
 		<!-- Testing : JUnit -->
 
 		<dependency>
@@ -45,13 +55,17 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-core</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
 	</dependencies>
-	
+
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${mvn.compiler.plugin.version}</version>
@@ -60,8 +74,8 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 </project>

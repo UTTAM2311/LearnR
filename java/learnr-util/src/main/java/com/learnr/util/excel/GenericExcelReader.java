@@ -63,15 +63,16 @@ public class GenericExcelReader<T extends IExcelEntity> {
 		this.fileType = getFileType(this.file);
 	}
 
-	public GenericExcelReader(File file) {
+	public GenericExcelReader(File inFile) {
 		super();
 
-		Verify.notNull(file);
+		Verify.notNull(inFile);
 		
-		if (!file.canRead()) {
+		if (!inFile.canRead()) {
 			throw new RuntimeException("file doesn't have read permission");
 		}
 
+		this.file = inFile;
 		this.fileType = getFileType(this.file);
 	}
 
